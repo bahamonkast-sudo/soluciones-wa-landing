@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLUCIONES WA | Automatización y Ventas por WhatsApp</title>
+  <meta name="description" content="Automatiza tus mensajes personalizados, extrae prospectos calificados y ahorra horas de trabajo cada día protegiendo siempre tus números de WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest">
+
+</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --brand:#00c2cb;--brand-light:#4fe0e7;--brand-dark:#080d1a;
+      --bg-alt:#0d1322;--card:#11192e;--card-relief:#15203a;
+      --border:rgba(255,255,255,0.08);--border-glow:rgba(0,194,203,0.35);
+      --plus-color:#00e5a3;--plus-glow:rgba(0,229,163,0.3);
+      --white:#ffffff;--text-main:#e2e8f0;--muted:#94a3b8;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter','Plus Jakarta Sans',sans-serif;
+      background:var(--brand-dark);color:var(--muted);
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+      position:relative;
+    }
+    h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif;color:var(--white);line-height:1.25}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--brand-dark)}
+    ::-webkit-scrollbar-thumb{background:rgba(0,194,203,0.35);border-radius:99px}
+    ::-webkit-scrollbar-thumb:hover{background:var(--brand)}
+
+    .ctr{max-width:1160px;margin:0 auto;padding:0 1.5rem}
+    .ctr-sm{max-width:880px;margin:0 auto;padding:0 1.5rem}
+
+    /* ELEMENTOS DE FONDO */
+    .grid-pattern{
+      position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:
+        radial-gradient(circle 900px at 20% 15%, rgba(0,194,203,0.07), transparent),
+        radial-gradient(circle 800px at 80% 55%, rgba(0,229,163,0.05), transparent);
+    }
+    .dots-overlay{
+      position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size:36px 36px;
+    }
+    .divl{height:1px;background:linear-gradient(90deg,transparent,rgba(0,194,203,0.22),transparent);position:relative;z-index:3}
+
+    /* BADGES */
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--brand);background:rgba(0,194,203,0.08);
+      border:1px solid rgba(0,194,203,0.26);border-radius:999px;
+      padding:6px 16px;box-shadow:0 0 16px rgba(0,194,203,0.12);
+      backdrop-filter:blur(10px);
+    }
+    .badge-dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 8px var(--brand);animation:pulseDot 2s infinite}
+    @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+
+    /* BOTONES */
+    .btn-p{
+      position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:15px 34px;border-radius:14px;
+      background:var(--brand);color:#06101d;
+      font-weight:800;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;
+      text-decoration:none;transition:all .28s ease;
+      box-shadow:0 6px 28px rgba(0,194,203,0.28), 0 0 0 1px rgba(255,255,255,0.2) inset;
+      overflow:hidden;
+    }
+    .btn-p:hover{
+      background:var(--brand-light);transform:translateY(-3px);
+      box-shadow:0 10px 36px rgba(0,194,203,0.45);
+    }
+    .btn-s{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:15px 32px;border-radius:14px;
+      background:rgba(255,255,255,0.04);border:1px solid var(--border);
+      color:var(--white);font-weight:600;font-size:.86rem;text-decoration:none;
+      transition:all .28s ease;backdrop-filter:blur(8px);
+    }
+    .btn-s:hover{
+      background:rgba(255,255,255,0.08);border-color:rgba(0,194,203,0.35);
+      color:var(--brand-light);transform:translateY(-3px);
+    }
+
+    /* REVEAL ON SCROLL */
+    .reveal{
+      opacity:0;transform:translateY(28px);
+      transition:opacity .75s cubic-bezier(0.16,1,0.3,1), transform .75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.vis{opacity:1;transform:translateY(0)}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:100;
+      backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+      background:rgba(8,13,26,0.85);border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .logo-ic{
+      width:42px;height:42px;border-radius:12px;
+      background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.3);
+      display:flex;align-items:center;justify-content:center;color:var(--brand);
+      box-shadow:0 0 15px rgba(0,194,203,0.15);
+    }
+    .logo-nm{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.15rem;color:var(--white);letter-spacing:-.02em}
+    .logo-nm span{color:var(--brand)}
+    .logo-sub{font-size:.56rem;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;display:block;margin-top:2px}
+    nav{display:flex;align-items:center;gap:28px}
+    nav a{font-size:.84rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;position:relative}
+    nav a::after{
+      content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;
+      background:var(--brand);transform:scaleX(0);transition:transform .25s;border-radius:99px;
+    }
+    nav a:hover{color:var(--white)}nav a:hover::after{transform:scaleX(1)}
+    @media(max-width:800px){nav{display:none}}
+
+    /* HERO PRINCIPAL */
+    .hero{padding:85px 0 75px;position:relative;z-index:2;overflow:hidden}
+    .hero-content{text-align:center;position:relative;z-index:3}
+    .hero h1{
+      font-size:clamp(2.1rem,4.6vw,3.6rem);
+      font-weight:800;letter-spacing:-.03em;
+      margin:1.4rem auto 1.2rem;max-width:920px;
+    }
+    .hero-sub{
+      font-size:clamp(1rem,1.9vw,1.18rem);color:var(--muted);
+      max-width:690px;margin:0 auto 2.3rem;line-height:1.75;
+    }
+    .hero-sub strong{color:var(--text-main);font-weight:600}
+    .hero-ctas{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:15px;margin-bottom:3rem}
+
+    /* BARRA DE BENEFICIOS DESTACADOS */
+    .benefit-strip{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+      max-width:820px;margin:0 auto 3.4rem;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      padding:1.3rem 0;
+    }
+    @media(min-width:640px){.benefit-strip{grid-template-columns:repeat(4,1fr)}}
+    .bs-item{display:flex;align-items:center;justify-content:center;gap:9px;font-size:.78rem;color:var(--text-main);font-weight:600}
+    .bs-item svg{color:var(--brand);flex-shrink:0}
+
+    /* HERO SHOWCASE CON PARALLAX Y RELIEVES */
+    .hero-showcase{
+      max-width:980px;margin:0 auto;position:relative;
+    }
+    .hero-main-frame{
+      position:relative;border-radius:24px;overflow:hidden;
+      border:1px solid rgba(0,194,203,0.3);
+      box-shadow:0 25px 70px rgba(0,0,0,0.65), 0 0 50px rgba(0,194,203,0.14);
+      background:var(--card);
+    }
+    .hero-robot-video{aspect-ratio:16/9;background:#f4f7fa;object-position:center;touch-action:pan-y;cursor:ew-resize;}
+    .hero-main-frame img,.hero-main-frame video{
+      width:100%;height:auto;display:block;object-fit:cover;
+    }
+
+    /* TARJETAS FLOTANTES PARALLAX */
+    .float-card{
+      position:absolute;z-index:4;padding:14px 20px;border-radius:16px;
+      background:rgba(17,25,46,0.92);backdrop-filter:blur(14px);
+      border:1px solid rgba(0,194,203,0.3);
+      box-shadow:0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(0,194,203,0.15);
+      display:flex;align-items:center;gap:14px;
+      transition:transform 0.15s ease-out;
+    }
+    .fc-top-left{top:-20px;left:-25px}
+    .fc-bottom-right{bottom:-20px;right:-25px}
+    @media(max-width:880px){.float-card{display:none}}
+    .fc-icon{
+      width:40px;height:40px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(0,194,203,0.12);color:var(--brand);flex-shrink:0;
+    }
+    .fc-title{font-size:.82rem;font-weight:700;color:var(--white)}
+    .fc-desc{font-size:.72rem;color:var(--muted)}
+
+    /* SECTION HEADERS */
+    .sh{text-align:center;margin-bottom:3.6rem;position:relative;z-index:2}
+    .sh h2{font-size:clamp(1.75rem,3.4vw,2.65rem);font-weight:800;margin-top:.8rem;letter-spacing:-.025em}
+    .sh p{margin-top:.8rem;font-size:.96rem;max-width:620px;margin-left:auto;margin-right:auto;line-height:1.75}
+
+    /* SECCIÓN DE BENEFICIOS REALES */
+    .beneficios{padding:105px 0;background:var(--bg-alt);position:relative;z-index:2}
+    .bg-cards{display:grid;grid-template-columns:1fr;gap:24px}
+    @media(min-width:768px){.bg-cards{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1040px){.bg-cards{grid-template-columns:repeat(3,1fr)}}
+    .b-card{
+      padding:2.2rem 2rem;border-radius:20px;
+      background:var(--card);border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(0,0,0,0.3);
+      transition:all .3s cubic-bezier(0.16,1,0.3,1);
+      position:relative;overflow:hidden;
+    }
+    .b-card:hover{
+      border-color:var(--border-glow);
+      box-shadow:0 18px 45px rgba(0,0,0,0.45), 0 0 25px rgba(0,194,203,0.12);
+      transform:translateY(-6px);
+    }
+    .b-icon{
+      width:52px;height:52px;border-radius:15px;
+      background:rgba(0,194,203,0.09);border:1px solid rgba(0,194,203,0.24);
+      display:flex;align-items:center;justify-content:center;color:var(--brand);
+      margin-bottom:1.4rem;box-shadow:0 0 15px rgba(0,194,203,0.1);
+    }
+    .b-card h3{font-size:1.15rem;margin-bottom:.7rem}
+    .b-card p{font-size:.88rem;line-height:1.72;color:var(--muted)}
+    .b-highlight{
+      margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);
+      font-size:.74rem;color:#34d399;font-weight:600;display:flex;align-items:center;gap:7px;
+    }
+
+    /* SECCIÓN DE TRANQUILIDAD Y SEGURIDAD */
+    .seguridad{padding:105px 0;background:var(--brand-dark);position:relative;z-index:2}
+    .seg-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+    @media(min-width:920px){.seg-grid{grid-template-columns:1fr 1fr}}
+    .seg-content h2{font-size:clamp(1.75rem,3.2vw,2.55rem);margin-bottom:1.1rem;letter-spacing:-.02em}
+    .seg-content p{font-size:.95rem;line-height:1.8;margin-bottom:2rem}
+    .seg-list{list-style:none;display:flex;flex-direction:column;gap:18px}
+    .seg-list li{display:flex;align-items:flex-start;gap:16px}
+    .seg-check{
+      width:34px;height:34px;flex-shrink:0;border-radius:11px;
+      background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.25);
+      display:flex;align-items:center;justify-content:center;color:var(--brand);margin-top:2px;
+    }
+    .seg-list h4{font-size:.95rem;margin-bottom:3px}
+    .seg-list p{font-size:.83rem;line-height:1.65;color:var(--muted)}
+    .seg-img-wrap{position:relative}
+    .seg-img-wrap img{
+      width:100%;border-radius:22px;border:1px solid rgba(0,194,203,0.22);
+      box-shadow:0 20px 50px rgba(0,0,0,0.55), 0 0 35px rgba(0,194,203,0.12);
+    }
+
+    /* MÓDULOS DEL SISTEMA */
+    .modulos{padding:110px 0;background:var(--bg-alt);position:relative;z-index:2}
+    .plan-switch-banner{
+      max-width:860px;margin:0 auto 3rem;padding:1.2rem 1.8rem;border-radius:18px;
+      background:rgba(17,25,46,0.85);border:1px solid var(--border);
+      display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    }
+    .ps-info{display:flex;align-items:center;gap:12px;font-size:.88rem;color:var(--text-main)}
+    .ps-info strong{color:var(--brand)}
+
+    /* TITULOS DE CATEGORÍA DE SERVICIOS */
+    .mod-cat-title{
+      font-size:1.25rem;font-weight:800;color:var(--white);
+      margin:3rem 0 1.6rem;display:flex;align-items:center;gap:12px;
+    }
+    .mod-cat-title::after{
+      content:'';flex-grow:1;height:1px;background:linear-gradient(90deg, rgba(0,194,203,0.35), transparent);
+    }
+    .mod-cat-badge{
+      font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+      padding:4px 12px;border-radius:8px;background:rgba(0,194,203,0.1);color:var(--brand);
+      border:1px solid rgba(0,194,203,0.2);
+    }
+
+    .mg{display:grid;grid-template-columns:1fr;gap:22px}
+    @media(min-width:640px){.mg{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1040px){.mg{grid-template-columns:repeat(3,1fr)}}
+    .mg.cols-2{grid-template-columns:1fr}
+    @media(min-width:768px){.mg.cols-2{grid-template-columns:repeat(2,1fr)}}
+
+    .mc{
+      padding:1.8rem;border-radius:20px;
+      background:var(--card);border:1px solid var(--border);
+      transition:all .3s cubic-bezier(0.16,1,0.3,1);
+      position:relative;display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .mc:hover{
+      border-color:var(--border-glow);
+      box-shadow:0 16px 40px rgba(0,0,0,0.4), 0 0 25px rgba(0,194,203,0.12);
+      transform:translateY(-5px);
+    }
+    .mc.card-plus{
+      border-color:rgba(0,229,163,0.22);
+      background:linear-gradient(180deg, rgba(17,25,46,0.95), rgba(13,20,36,0.95));
+    }
+    .mc.card-plus:hover{
+      border-color:var(--plus-glow);
+      box-shadow:0 16px 40px rgba(0,0,0,0.4), 0 0 25px rgba(0,229,163,0.15);
+    }
+    .mh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.1rem}
+    .mic{
+      width:46px;height:46px;border-radius:13px;
+      background:rgba(0,194,203,0.08);border:1px solid rgba(0,194,203,0.22);
+      display:flex;align-items:center;justify-content:center;color:var(--brand);
+    }
+    .mic.mic-plus{
+      background:rgba(0,229,163,0.08);border-color:rgba(0,229,163,0.25);color:var(--plus-color);
+    }
+    .mt{
+      font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      padding:4px 11px;border-radius:99px;
+    }
+    .tpro{color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.2)}
+    .tplus{color:var(--plus-color);background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.28)}
+    .mc h3{font-size:1.06rem;margin-bottom:.6rem;color:var(--white)}
+    .mc p{font-size:.85rem;line-height:1.68;color:var(--muted);flex-grow:1}
+
+    /* CAJA DE ENTRADA Y SALIDA */
+    .io-box{
+      margin-top:1.2rem;padding:.9rem 1.1rem;border-radius:12px;
+      background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.06);
+      display:flex;flex-direction:column;gap:7px;
+    }
+    .io-row{display:flex;align-items:baseline;gap:8px;font-size:.76rem}
+    .io-lbl{
+      font-weight:800;letter-spacing:.08em;font-size:.64rem;text-transform:uppercase;
+      color:var(--brand);flex-shrink:0;width:68px;
+    }
+    .io-lbl.plus{color:var(--plus-color)}
+    .io-val{color:var(--text-main);font-weight:500;line-height:1.4}
+
+    /* ENLACE DE ACCIÓN EN TARJETA */
+    .mod-action{
+      margin-top:1.1rem;padding-top:.8rem;border-top:1px solid var(--border);
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:.78rem;font-weight:700;color:var(--brand);text-decoration:none;
+      transition:gap .2s, color .2s;
+    }
+    .mod-action:hover{gap:10px;color:var(--brand-light)}
+    .mod-action.plus{color:var(--plus-color)}
+    .mod-action.plus:hover{color:#5effcf}
+
+    /* CÓMO FUNCIONA */
+    .pasos{padding:105px 0;background:var(--brand-dark);position:relative;z-index:2}
+    .sg{display:grid;grid-template-columns:1fr;gap:24px}
+    @media(min-width:768px){.sg{grid-template-columns:repeat(3,1fr)}}
+    .sc{
+      padding:2.2rem 1.8rem;border-radius:20px;
+      background:var(--card);border:1px solid var(--border);
+      position:relative;transition:all .3s ease;
+    }
+    .sc:hover{border-color:var(--border-glow);transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.3)}
+    .sn{
+      width:46px;height:46px;border-radius:50%;
+      background:var(--brand);color:#081326;font-weight:800;font-size:1.15rem;
+      display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;
+      font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 0 22px rgba(0,194,203,0.35);
+    }
+    .sc h3{font-size:1.06rem;margin-bottom:.7rem}
+    .sc p{font-size:.86rem;line-height:1.7}
+
+    /* MÉTRICAS ANIMADAS */
+    .metr{
+      padding:80px 0;background:var(--bg-alt);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      position:relative;z-index:2;
+    }
+    .mg2{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;text-align:center}
+    @media(min-width:768px){.mg2{grid-template-columns:repeat(4,1fr)}}
+    .mv{
+      font-family:'Plus Jakarta Sans',sans-serif;
+      font-size:clamp(2.4rem,4.6vw,3.6rem);
+      font-weight:800;color:var(--brand);line-height:1;margin-bottom:10px;
+      letter-spacing:-.02em;
+    }
+    .mv.teal{color:var(--plus-color)}
+    .ml{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+    /* TESTIMONIALES */
+    .testi{padding:105px 0;background:var(--brand-dark);position:relative;z-index:2}
+    .tg{display:grid;grid-template-columns:1fr;gap:22px}
+    @media(min-width:768px){.tg{grid-template-columns:repeat(3,1fr)}}
+    .tc{
+      padding:2rem;border-radius:20px;
+      background:var(--card);border:1px solid var(--border);
+      transition:all .3s ease;
+    }
+    .tc:hover{border-color:rgba(0,194,203,0.28);transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.3)}
+    .stars{color:#f59e0b;font-size:.95rem;margin-bottom:1.1rem;letter-spacing:2px}
+    .tt{font-size:.88rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.4rem}
+    .ta{display:flex;align-items:center;gap:12px}
+    .tav{
+      width:40px;height:40px;border-radius:50%;
+      background:rgba(0,194,203,0.15);border:2px solid rgba(0,194,203,0.3);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.88rem;font-weight:700;color:var(--brand);
+    }
+    .tn{font-size:.86rem;font-weight:700;color:var(--white)}
+    .tr{font-size:.72rem;color:var(--muted)}
+
+    /* PLANES Y TABLA COMPARATIVA */
+    .precios{padding:110px 0;background:var(--bg-alt);position:relative;z-index:2}
+    .pricing-cards-grid{
+      display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:3.5rem;
+    }
+    @media(min-width:860px){.pricing-cards-grid{grid-template-columns:1fr 1fr}}
+    .plan-box{
+      border-radius:24px;background:var(--card);border:1px solid var(--border);
+      padding:2.5rem;position:relative;overflow:hidden;
+      display:flex;flex-direction:column;justify-content:space-between;
+      transition:all .3s ease;
+    }
+    .plan-box:hover{transform:translateY(-5px)}
+    .plan-box.plus-featured{
+      border-color:rgba(0,229,163,0.35);
+      background:linear-gradient(180deg, #121f3a, #0e172a);
+      box-shadow:0 0 40px rgba(0,229,163,0.08), 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .plan-tag-rec{
+      position:absolute;top:20px;right:20px;
+      font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      padding:5px 14px;border-radius:99px;
+      background:rgba(0,229,163,0.15);color:var(--plus-color);
+      border:1px solid rgba(0,229,163,0.35);box-shadow:0 0 15px rgba(0,229,163,0.2);
+    }
+    .plan-header h3{font-size:1.45rem;margin-bottom:.5rem}
+    .plan-header p{font-size:.86rem;color:var(--muted);margin-bottom:1.6rem;line-height:1.6}
+    .plan-rate{
+      display:flex;align-items:baseline;gap:8px;
+      margin-bottom:1.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);
+    }
+    .plan-rate .amount{font-family:'Plus Jakarta Sans',sans-serif;font-size:2rem;font-weight:800;color:var(--white)}
+    .plan-rate .period{font-size:.84rem;color:var(--muted)}
+    .plan-feats{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:2.2rem}
+    .plan-feats li{display:flex;align-items:flex-start;gap:12px;font-size:.86rem;color:var(--text-main)}
+    .plan-feats li svg{flex-shrink:0;margin-top:3px}
+    .plan-feats li.feat-off{color:#64748b}
+
+    /* TABLA */
+    .ptw{border-radius:22px;border:1px solid var(--border);background:var(--card);overflow:hidden;box-shadow:0 0 50px rgba(0,0,0,0.5)}
+    table{width:100%;border-collapse:collapse;font-size:.86rem}
+    thead tr{background:rgba(0,0,0,0.35)}
+    thead th{padding:1.3rem 1.4rem;font-weight:700;color:var(--white);font-size:.85rem}
+    .cp{text-align:center;color:#94a3b8}
+    .cpl{text-align:center;background:rgba(0,229,163,0.06);color:var(--plus-color);font-weight:800}
+    tbody tr{border-top:1px solid var(--border);transition:background .2s}
+    tbody tr:hover{background:rgba(255,255,255,0.02)}
+    tbody td{padding:1.05rem 1.4rem}
+    .feat-name{color:var(--text-main);font-weight:500}
+    .feat-sub{font-size:.74rem;color:var(--muted);display:block;margin-top:2px}
+    .tdp{text-align:center;color:#64748b}
+    .tdpl{text-align:center;background:rgba(0,229,163,0.04);color:var(--plus-color);font-weight:700}
+    tfoot tr{background:rgba(0,0,0,0.4);border-top:1px solid rgba(0,194,203,0.15)}
+    tfoot td{padding:1.4rem}
+    .fnote{font-size:.76rem;color:var(--muted)}
+
+    /* GARANTÍAS */
+    .gar{padding:85px 0;background:var(--brand-dark);position:relative;z-index:2}
+    .gg{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:640px){.gg{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.gg{grid-template-columns:repeat(4,1fr)}}
+    .gc{
+      padding:1.8rem;border-radius:20px;
+      background:rgba(0,194,203,0.03);border:1px solid rgba(0,194,203,0.12);
+      text-align:center;transition:all .3s ease;
+    }
+    .gc:hover{border-color:rgba(0,194,203,0.3);box-shadow:0 0 25px rgba(0,194,203,0.08);transform:translateY(-3px)}
+    .gi{
+      width:52px;height:52px;border-radius:15px;
+      background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.22);
+      display:flex;align-items:center;justify-content:center;color:var(--brand);margin:0 auto 1.1rem;
+    }
+    .gc h4{font-size:.92rem;margin-bottom:.45rem}
+    .gc p{font-size:.78rem;line-height:1.6}
+
+    /* FAQ */
+    .faq{padding:105px 0;background:var(--bg-alt);position:relative;z-index:2}
+    .fl{display:flex;flex-direction:column;gap:14px}
+    .fi{border-radius:18px;background:var(--card);border:1px solid var(--border);overflow:hidden;transition:border-color .3s}
+    .fi:hover{border-color:rgba(0,194,203,0.25)}
+    .fq{
+      width:100%;padding:1.25rem 1.6rem;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      background:none;border:none;cursor:pointer;text-align:left;
+      color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.92rem;
+    }
+    .fq svg{flex-shrink:0;color:var(--brand);transition:transform .3s}
+    .fi.open .fq svg{transform:rotate(180deg)}
+    .fa{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0.16,1,0.3,1)}
+    .fi.open .fa{max-height:350px}
+    .fai{padding:0 1.6rem 1.3rem;font-size:.86rem;line-height:1.8;color:#94a3b8}
+
+    /* CTA FINAL */
+    .ctaf{padding:120px 0;text-align:center;background:var(--brand-dark);position:relative;overflow:hidden;z-index:2}
+    .ctaf::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 65% 55% at 50% 50%, rgba(0,194,203,0.1) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .ctaf-c{position:relative;z-index:3}
+    .ctaf h2{font-size:clamp(2.1rem,4.2vw,3.3rem);font-weight:800;margin-bottom:1.2rem;letter-spacing:-.025em}
+    .ctaf p{font-size:1.05rem;max-width:580px;margin:0 auto 2.6rem;line-height:1.75}
+    .ctan{margin-top:2.2rem;font-size:.78rem;color:var(--muted)}
+    .ctan span{color:var(--brand);font-weight:600}
+
+    /* FOOTER */
+    footer{padding:2.6rem 0;background:#050914;border-top:1px solid var(--border);position:relative;z-index:2}
+    .fi2{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+    @media(min-width:600px){.fi2{flex-direction:row;justify-content:space-between;text-align:left}}
+    .fls{display:flex;gap:24px}
+    .fls a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .2s}
+    .fls a:hover{color:var(--brand)}
+    .fc{font-size:.8rem;color:var(--muted)}
+  
+    /* Pulido visual: jerarquía, contraste y adaptación a pantallas pequeñas */
+    :root{
+      --brand:#35d5d0;--brand-light:#77eeea;--brand-dark:#080f1c;
+      --bg-alt:#0c1727;--card:#111e31;--card-relief:#172840;
+      --border:rgba(181,209,228,.12);--border-glow:rgba(53,213,208,.42);
+      --white:#f4f8fc;--text-main:#dce7f0;--muted:#a6b6c7;
+    }
+    body{background:linear-gradient(180deg,#091321 0%,#0a1422 42%,#091321 100%)}
+    .grid-pattern{background-image:radial-gradient(ellipse 780px 520px at 50% 0%,rgba(53,213,208,.105),transparent 72%),radial-gradient(ellipse 600px 480px at 92% 48%,rgba(0,229,163,.045),transparent 70%)}
+    .dots-overlay{opacity:.48;background-size:42px 42px}
+    .ctr{max-width:1200px}
+    header{background:rgba(8,15,28,.88);border-bottom-color:rgba(181,209,228,.1)}
+    .nav-inner{height:76px}
+    .logo-ic{background:linear-gradient(145deg,rgba(53,213,208,.2),rgba(53,213,208,.05));border-color:rgba(53,213,208,.38)}
+    nav{gap:clamp(12px,2vw,25px)}
+    nav a{font-size:.79rem;color:#b4c2d0}
+    .btn-p{background:linear-gradient(135deg,#54e2dc,#27c8c5);box-shadow:0 8px 26px rgba(35,197,194,.22),0 0 0 1px rgba(255,255,255,.22) inset}
+    .btn-p:hover{background:linear-gradient(135deg,#8bf1eb,#42d9d4);box-shadow:0 12px 34px rgba(35,197,194,.3)}
+    .btn-s{border-color:rgba(181,209,228,.16);background:rgba(255,255,255,.035)}
+    .hero{padding:clamp(65px,8vw,104px) 0 82px}
+    .hero h1{max-width:980px;font-size:clamp(2.35rem,5.2vw,4.35rem);line-height:1.08;letter-spacing:-.055em;margin-top:1.55rem}
+    .hero-sub{max-width:710px;font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.85}
+    .badge{letter-spacing:.1em;color:#6de4df;background:rgba(53,213,208,.09);border-color:rgba(53,213,208,.28)}
+    .benefit-strip{max-width:920px;padding:1.2rem .5rem;border-color:rgba(181,209,228,.13)}
+    .bs-item{font-size:.77rem;line-height:1.5}
+    .hero-main-frame{border-radius:26px;border-color:rgba(93,222,217,.3);box-shadow:0 28px 72px rgba(0,0,0,.42),0 0 55px rgba(53,213,208,.1)}
+    .float-card{border-color:rgba(93,222,217,.3);background:rgba(16,30,49,.94)}
+    .beneficios,.modulos{background:linear-gradient(180deg,#0d1929,#0b1625)}
+    .beneficios,.seguridad,.modulos,.pasos,.gar,.faq{padding-top:clamp(76px,9vw,112px);padding-bottom:clamp(76px,9vw,112px)}
+    .sh{margin-bottom:3rem}
+    .sh h2,.seg-content h2{letter-spacing:-.04em;line-height:1.15}
+    .sh p{color:#a9bac9}
+    .b-card,.mc,.gc,.sc,.fi{border-color:rgba(181,209,228,.12);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+    .b-card{background:linear-gradient(155deg,rgba(20,35,55,.98),rgba(15,27,44,.98));padding:2rem}
+    .b-card:hover,.mc:hover{transform:translateY(-4px)}
+    .b-icon,.mic,.seg-check{background:rgba(53,213,208,.1);border-color:rgba(53,213,208,.22);color:#62e1dc}
+    .b-highlight{color:#58ddb5}
+    .plan-switch-banner{background:rgba(17,30,49,.78);border-color:rgba(181,209,228,.14)}
+    .mc{background:linear-gradient(155deg,#132239,#101c2e)}
+    .mc.card-plus{border-color:rgba(0,229,163,.27);background:linear-gradient(155deg,rgba(17,39,47,.98),rgba(14,29,39,.98))}
+    .io-box{background:rgba(4,10,18,.34);border-color:rgba(181,209,228,.1)}
+    .mod-action{color:#58d9d5}
+    .ptw{border:1px solid rgba(181,209,228,.14);border-radius:20px;overflow:hidden;background:rgba(15,28,46,.7);box-shadow:0 22px 55px rgba(0,0,0,.25)}
+    table{border-collapse:collapse}
+    th{letter-spacing:.06em}
+    tbody tr:hover{background:rgba(255,255,255,.025)}
+    .gc{background:rgba(17,30,49,.72);border-radius:18px;padding:1.7rem}
+    .gi{color:#67e1dc}
+    .fi{background:rgba(17,30,49,.68);border-radius:15px;margin-bottom:12px;overflow:hidden}
+    .fq{padding:1.2rem 1.4rem;color:var(--white)}
+    .fa{line-height:1.8}
+    .ctaf-c{border:1px solid rgba(83,222,216,.2);border-radius:28px;background:radial-gradient(ellipse at 50% 0%,rgba(53,213,208,.11),transparent 65%),rgba(15,28,46,.62);padding:clamp(2.4rem,6vw,4.5rem) 1.5rem}
+    footer{border-top:1px solid rgba(181,209,228,.11);background:rgba(5,11,20,.42)}
+    a:focus-visible,button:focus-visible{outline:3px solid #7af0eb;outline-offset:4px}
+    @media(max-width:800px){
+      .nav-inner{height:68px;gap:10px}
+      .logo{gap:8px}.logo-ic{width:38px;height:38px}.logo-sub{display:none}
+      .nav-inner>.btn-p{padding:10px 14px!important;font-size:.68rem!important;gap:6px}
+      .hero{padding-top:58px}.hero h1{font-size:clamp(2.2rem,8vw,3.5rem)}
+      .hero-sub{max-width:600px}.benefit-strip{row-gap:16px}
+      .float-card{display:none}
+    }
+    @media(max-width:520px){
+      .ctr,.ctr-sm{padding-left:1.1rem;padding-right:1.1rem}
+      .hero{padding-bottom:64px}.hero h1{font-size:2.25rem;line-height:1.12}
+      .hero .badge{font-size:.58rem;letter-spacing:.07em;padding:7px 12px;line-height:1.55}
+      .hero-ctas{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:2rem}
+      .hero-ctas a{width:100%;padding:14px 18px}
+      .benefit-strip{grid-template-columns:1fr 1fr;margin-bottom:2.5rem;padding:1rem 0}
+      .bs-item{justify-content:flex-start;font-size:.69rem;gap:7px}
+      .hero-main-frame{border-radius:17px}
+      .sh{margin-bottom:2.3rem}.sh h2{font-size:1.85rem}
+      .b-card,.mc{padding:1.55rem}
+      .plan-switch-banner{padding:1rem;align-items:flex-start}
+      .ptw{border-radius:14px}
+      .ctaf-c{padding:2.5rem 1.1rem;border-radius:20px}
+      .ctaf-c .btn-p{padding:15px 20px!important;font-size:.78rem!important}
+      .fi2{gap:18px;flex-direction:column;align-items:flex-start}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+      .reveal{opacity:1;transform:none}
+    }
+      .nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--border);border-radius:12px;color:var(--white);background:rgba(255,255,255,.04);cursor:pointer}
+    @media(max-width:800px){
+      .nav-inner{position:relative}
+      .nav-toggle{display:inline-flex;order:2}
+      .nav-inner>.btn-p{order:3}
+      .nav-inner nav{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;z-index:120;flex-direction:column;align-items:stretch;gap:0;padding:8px;border:1px solid var(--border);border-radius:0 0 16px 16px;background:rgba(8,15,28,.98);box-shadow:0 18px 35px rgba(0,0,0,.35)}
+      .nav-inner nav.is-open{display:flex}
+      .nav-inner nav a{padding:13px 14px;border-radius:9px;font-size:.9rem}
+      .nav-inner nav a:hover{background:rgba(53,213,208,.08)}
+      .nav-inner nav a::after{display:none}
+    }
+      .hero-main-frame{isolation:isolate}
+    .hero-copy-overlay{position:absolute;z-index:3;left:0;top:0;bottom:0;width:38%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(1.25rem,3vw,2.5rem);padding-right:2.6rem;text-align:left;pointer-events:none;background:linear-gradient(90deg,rgba(8,15,28,.96) 0%,rgba(8,15,28,.91) 70%,rgba(8,15,28,.64) 88%,rgba(8,15,28,0) 100%);}
+    .hero-copy-overlay h1{max-width:100%;margin:0 0 1rem;font-size:clamp(1.55rem,3.1vw,2.55rem);line-height:1.08;letter-spacing:-.045em;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+    .hero-copy-overlay p{max-width:29rem;margin:0;color:#f1f6fa;font-size:clamp(.88rem,1.3vw,1.05rem);line-height:1.65;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+    @media(max-width:680px){
+      .hero-copy-overlay{position:relative;inset:auto;width:100%;padding:1.35rem 1.2rem;background:var(--card);border-top:1px solid var(--border);}
+      .hero-copy-overlay h1{font-size:clamp(1.8rem,8vw,2.45rem);margin-bottom:.75rem}
+      .hero-copy-overlay p{font-size:.96rem}
+    }
+      /* Composición lateral: espacio de lectura a la izquierda y robot a la derecha */
+    .hero-main-frame{aspect-ratio:16/9;background:#f4f7fa;}
+    .hero-robot-video{position:absolute;top:0;left:18%;width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;object-position:center;}
+    @media(max-width:680px){
+      .hero-main-frame{aspect-ratio:auto;}
+      .hero-robot-video{position:relative;top:auto;left:auto;width:100%;height:auto;aspect-ratio:16/9;}
+    }
+      /* Fondo transparente y composición sin panel detrás del texto */
+    .hero-main-frame{aspect-ratio:16/9;background:transparent;isolation:isolate;}
+    .hero-robot-image{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;object-position:center;}
+    .hero-copy-overlay{width:41%;padding:clamp(1.25rem,3vw,2.5rem);padding-right:1.6rem;background:transparent;}
+    .hero-copy-overlay h1{font-size:clamp(2rem,4.4vw,3.65rem);line-height:1.04;letter-spacing:-.045em;margin:0 0 1rem;color:#fff;text-shadow:0 3px 22px rgba(0,0,0,.78);}
+    .hero-copy-overlay p{max-width:100%;font-size:clamp(1rem,1.55vw,1.28rem);line-height:1.6;color:#eaf2f8;text-shadow:0 2px 16px rgba(0,0,0,.78);}
+    @media(max-width:680px){
+      .hero-main-frame{aspect-ratio:auto;}
+      .hero-robot-image{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/9;}
+      .hero-copy-overlay{position:relative;inset:auto;width:100%;padding:1.35rem 1.2rem;background:transparent;border-top:0;}
+      .hero-copy-overlay h1{font-size:clamp(1.9rem,8vw,2.65rem);margin-bottom:.8rem;}
+      .hero-copy-overlay p{font-size:1.05rem;}
+    }
+      /* Video claro traslúcido con tipografía de alto contraste */
+    .hero-main-frame{aspect-ratio:16/9;background:transparent;}
+    .hero-robot-video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;object-position:center;opacity:.84;touch-action:pan-y;cursor:ew-resize;}
+    .hero-copy-overlay{width:41%;padding:clamp(1.25rem,3vw,2.5rem);padding-right:1.6rem;background:transparent;}
+    .hero-copy-overlay h1{font-size:clamp(2rem,4.4vw,3.65rem);line-height:1.04;letter-spacing:-.045em;margin:0 0 1rem;color:#101827;text-shadow:0 1px 1px rgba(255,255,255,.45);}
+    .hero-copy-overlay p{max-width:100%;font-size:clamp(1rem,1.55vw,1.28rem);line-height:1.6;color:#26364d;text-shadow:0 1px 1px rgba(255,255,255,.45);}
+    @media(max-width:680px){
+      .hero-main-frame{aspect-ratio:auto;}
+      .hero-robot-video{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/9;}
+      .hero-copy-overlay{position:relative;inset:auto;width:100%;padding:1.35rem 1.2rem;background:transparent;border-top:0;}
+      .hero-copy-overlay h1{font-size:clamp(1.9rem,8vw,2.65rem);margin-bottom:.8rem;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.65);}
+      .hero-copy-overlay p{font-size:1.05rem;color:#eaf2f8;text-shadow:0 2px 16px rgba(0,0,0,.65);}
+    }
+      /* Zoom de lectura para las tarjetas de módulos */
+    #modulos .mc{position:relative;z-index:1;transform-origin:center;transition:transform .58s cubic-bezier(.22,1,.36,1),box-shadow .58s cubic-bezier(.22,1,.36,1),border-color .4s ease;}
+    @media(hover:hover) and (pointer:fine){
+      #modulos .mc:hover{z-index:20;transform:translateY(-4px) scale(1.3);box-shadow:0 24px 55px rgba(0,0,0,.55),0 0 30px rgba(53,213,208,.18);}
+      #modulos .mc.card-plus:hover{box-shadow:0 24px 55px rgba(0,0,0,.55),0 0 32px rgba(0,229,163,.2);}
+    }
+    #modulos .mc:focus-within{z-index:20;transform:scale(1.3);box-shadow:0 24px 55px rgba(0,0,0,.55),0 0 30px rgba(53,213,208,.18);}
+    #modulos .mc.card-plus:focus-within{box-shadow:0 24px 55px rgba(0,0,0,.55),0 0 32px rgba(0,229,163,.2);}
+    @media(prefers-reduced-motion:reduce){#modulos .mc{transition:none;}}
+
+    .tier-pill{display:inline-flex;margin-left:.7rem;padding:.22rem .55rem;border-radius:999px;font-size:.64rem;font-weight:800;letter-spacing:.06em;vertical-align:middle}
+    .tier-pro{color:#a5f3d0;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)}
+    .tier-plus{color:#9fffe0;background:rgba(0,229,163,.12);border:1px solid rgba(0,229,163,.3)}
+    .legal-section{position:relative;z-index:2;padding:3.5rem 0;background:rgba(5,9,20,.72);border-top:1px solid var(--border)}
+    .legal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .legal-card{padding:1.5rem;border:1px solid var(--border);border-radius:18px;background:rgba(255,255,255,.025)}
+    .legal-card h2{font-size:1.25rem;margin:1rem 0 .8rem;color:#f1f5f9}
+    .legal-card h3{font-size:.96rem;margin:1.2rem 0 .4rem;color:#e1edf7}
+    .legal-completion{grid-column:1/-1;border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.035)}
+    .legal-card p,.legal-source{font-size:.86rem;line-height:1.7;color:#bdc9d7}
+    .legal-card a,.legal-source a{color:#55ded6;text-decoration:underline;text-underline-offset:3px}
+    .legal-source{grid-column:1/-1;margin:.2rem 0 0}
+    @media(max-width:760px){.legal-grid{grid-template-columns:1fr}.legal-source{grid-column:auto}}
+
+    .legal-modal{width:min(1040px,calc(100vw - 2rem));max-width:none;max-height:min(92vh,1000px);padding:0;border:1px solid rgba(85,222,214,.32);border-radius:22px;background:#09111f;color:#e5edf5;box-shadow:0 28px 100px rgba(0,0,0,.7)}
+    .legal-modal::backdrop{background:rgba(1,5,12,.78);backdrop-filter:blur(5px)}
+    .legal-modal-shell{display:flex;flex-direction:column;max-height:min(92vh,1000px)}
+    .legal-modal-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);background:#09111f}
+    .legal-modal-top h2{font-size:1.35rem;margin:.55rem 0 0;color:#f1f5f9}
+    .legal-close{flex:0 0 auto;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.06);color:#e5edf5;cursor:pointer}
+    .legal-close:hover,.legal-close:focus-visible{background:rgba(85,222,214,.16);outline:2px solid #55ded6;outline-offset:2px}
+    .legal-modal-scroll{overflow:auto;padding:1.4rem}
+    .legal-modal-scroll .legal-grid{width:100%;max-width:none;margin:0}
+    @media(max-width:600px){.legal-modal{width:calc(100vw - 1rem);max-height:94vh;border-radius:16px}.legal-modal-shell{max-height:94vh}.legal-modal-top{padding:.9rem 1rem}.legal-modal-top h2{font-size:1.08rem}.legal-modal-scroll{padding:.8rem}}
+
+    .personalizacion{position:relative;z-index:2;padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(180deg,rgba(13,19,34,.55),rgba(8,13,26,.92));border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .personal-grid{display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:clamp(2rem,5vw,4.5rem)}
+    .personal-copy h2{font-size:clamp(2rem,3.5vw,3.15rem);line-height:1.08;letter-spacing:-.04em;margin:1.2rem 0 1rem;max-width:640px}
+    .personal-lead{max-width:650px;font-size:1.02rem;line-height:1.75;color:#bdc9d7}
+    .personal-example{margin:1.5rem 0 1.7rem;padding:1.2rem 1.25rem;border-radius:16px;border:1px solid rgba(85,222,214,.2);background:linear-gradient(135deg,rgba(17,34,50,.88),rgba(12,26,36,.78));box-shadow:0 14px 40px rgba(0,0,0,.2)}
+    .personal-example-head{display:flex;align-items:center;gap:.55rem;color:#70e7d7;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem}
+    .personal-example p{font-size:.95rem;line-height:1.75;color:#e2eaf1}
+    .personal-example strong{color:#83f2d5}
+    .personal-example-foot{display:block;margin-top:.7rem;color:#8297aa;font-size:.76rem}
+    .beneficiary-block h3{font-size:1rem;margin:0 0 .8rem;color:#e9f1f8}
+    .beneficiary-tags{display:flex;flex-wrap:wrap;gap:.55rem}
+    .beneficiary-tags span{display:inline-flex;align-items:center;gap:.45rem;padding:.58rem .72rem;border:1px solid rgba(173,199,219,.13);border-radius:999px;background:rgba(255,255,255,.035);font-size:.76rem;color:#d4e0eb}
+    .beneficiary-tags svg{width:14px;height:14px;color:#55ded6}
+    .personal-cta{margin-top:1.5rem;padding:13px 20px;font-size:.86rem}
+    .personal-visual{position:relative;padding:1rem;border-radius:28px;border:1px solid rgba(85,222,214,.13);background:radial-gradient(ellipse at 50% 45%,rgba(0,194,203,.1),rgba(8,13,26,.12) 68%);overflow:hidden}
+    .personal-svg{display:block;width:100%;height:auto;filter:drop-shadow(0 16px 40px rgba(0,0,0,.16))}
+    .visual-caption{display:flex;align-items:center;justify-content:center;gap:.55rem;color:#96b6c4;font-size:.8rem;margin:.2rem 0 .35rem}
+    .visual-caption svg{color:#55ded6}
+    #back-to-top{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:50;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid rgba(85,222,214,.48);background:rgba(8,18,31,.9);color:#75eee0;box-shadow:0 8px 28px rgba(0,0,0,.35);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s ease,transform .3s cubic-bezier(.22,1,.36,1),visibility .25s,background .2s}
+    #back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
+    #back-to-top:hover,#back-to-top:focus-visible{background:#0c5c55;color:#fff;outline:2px solid #55ded6;outline-offset:3px}
+    @media(max-width:900px){.personal-grid{grid-template-columns:1fr}.personal-visual{max-width:650px;width:100%;margin:0 auto;grid-row:1}.personal-copy{grid-row:2}}
+    @media(max-width:560px){.personal-visual{padding:.35rem;border-radius:20px}.beneficiary-tags span{font-size:.72rem}.personal-example{padding:1rem}}
+    @media(prefers-reduced-motion:reduce){#back-to-top{transition:none}}
+
+
+    .robot-interaction-cue{position:absolute;right:clamp(.8rem,2.4vw,1.7rem);bottom:clamp(.8rem,2.2vw,1.5rem);z-index:6;display:flex;align-items:center;gap:.65rem;max-width:calc(100% - 1.5rem);padding:.8rem 1.05rem;border:1px solid rgba(105,244,225,.62);border-radius:999px;background:rgba(5,19,31,.88);color:#effffb;box-shadow:0 8px 28px rgba(0,0,0,.32),0 0 24px rgba(0,229,190,.17);backdrop-filter:blur(12px);pointer-events:none;animation:cueGlow 2.8s ease-in-out infinite}
+    .robot-interaction-cue .cue-pointer{flex:0 0 auto;color:#7df7dd}
+    .robot-interaction-cue .cue-arrows{flex:0 0 auto;color:#74e9d7;animation:cueSlide 1.8s ease-in-out infinite}
+    .robot-interaction-cue span{font-size:.8rem;line-height:1.2;font-weight:750;letter-spacing:.01em;white-space:nowrap}
+    .robot-interaction-cue .cue-active,.robot-interaction-cue .cue-touch{display:none}
+    .robot-interaction-cue.is-active{border-color:rgba(0,229,163,.8);background:rgba(4,42,38,.94);box-shadow:0 10px 35px rgba(0,0,0,.38),0 0 30px rgba(0,229,163,.28);animation:none}
+    .robot-interaction-cue.is-active .cue-idle{display:none}
+    .robot-interaction-cue.is-active .cue-active{display:inline;color:#aaffdf}
+    @keyframes cueGlow{0%,100%{box-shadow:0 8px 28px rgba(0,0,0,.32),0 0 18px rgba(0,229,190,.12)}50%{box-shadow:0 8px 30px rgba(0,0,0,.32),0 0 29px rgba(0,229,190,.3)}}
+    @keyframes cueSlide{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+    @media(max-width:680px){
+      .robot-interaction-cue{right:.6rem;bottom:.6rem;gap:.45rem;padding:.62rem .75rem;border-radius:14px;max-width:calc(100% - 1.2rem)}
+      .robot-interaction-cue span{font-size:.68rem;white-space:normal}
+      .robot-interaction-cue .cue-idle{display:none}
+      .robot-interaction-cue .cue-touch{display:inline}
+      .robot-interaction-cue.is-active .cue-touch{display:inline;color:#aaffdf}
+      .robot-interaction-cue.is-active .cue-active{display:none}
+    }
+    @media(prefers-reduced-motion:reduce){.robot-interaction-cue,.robot-interaction-cue .cue-arrows{animation:none}}
+
+    .social-section{position:relative;z-index:2;padding:3rem 0;background:linear-gradient(180deg,rgba(8,13,26,.9),rgba(13,19,34,.75));border-top:1px solid var(--border)}
+    .social-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,.8fr);align-items:center;gap:2rem}
+    .social-copy h2{max-width:520px;margin:1rem 0 .7rem;font-size:clamp(1.65rem,3vw,2.35rem);line-height:1.15;letter-spacing:-.03em}
+    .social-copy p{max-width:520px;color:#aebdca;line-height:1.7;font-size:.94rem}
+    .facebook-like-card{padding:1.35rem;border-radius:20px;border:1px solid rgba(94,145,220,.23);background:linear-gradient(145deg,rgba(20,35,58,.92),rgba(12,21,38,.9));box-shadow:0 18px 44px rgba(0,0,0,.25)}
+    .facebook-like-heading{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+    .facebook-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#1877f2;color:white;font:bold 36px/1 Arial,sans-serif;padding-top:8px}
+    .facebook-like-heading strong,.facebook-like-heading small{display:block}
+    .facebook-like-heading strong{font-size:.98rem;color:#edf4fc}
+    .facebook-like-heading small{margin-top:.18rem;font-size:.75rem;color:#9badc0}
+    .facebook-plugin-wrap{display:flex;align-items:center;min-height:58px;padding:.65rem .8rem;border-radius:12px;background:#f7f9fc;overflow:hidden}
+    .facebook-plugin-wrap iframe{display:block;width:100%;max-width:450px;height:80px;border:0}
+    .facebook-note{margin:.65rem 0;color:#91a3b5;font-size:.7rem;line-height:1.5}
+    .facebook-open{display:inline-flex;align-items:center;gap:.35rem;color:#82b5ff;font-size:.8rem;font-weight:700;text-decoration:none}
+    .facebook-open:hover{text-decoration:underline;text-underline-offset:3px}
+    .floating-whatsapp{position:fixed;left:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:50;display:inline-flex;align-items:center;gap:.58rem;padding:.85rem 1.1rem;border:1px solid rgba(126,255,203,.42);border-radius:999px;background:#087b58;color:#fff;text-decoration:none;font-size:.83rem;font-weight:800;box-shadow:0 9px 30px rgba(0,0,0,.38),0 0 20px rgba(0,229,163,.15);transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+    .floating-whatsapp svg{flex:0 0 auto}
+    .floating-whatsapp:hover,.floating-whatsapp:focus-visible{transform:translateY(-3px);background:#07966a;box-shadow:0 12px 34px rgba(0,0,0,.42),0 0 28px rgba(0,229,163,.25);outline:2px solid #93ffd2;outline-offset:3px}
+    @media(max-width:760px){.social-inner{grid-template-columns:1fr;gap:1.35rem}.facebook-like-card{max-width:560px;width:100%;margin:0 auto}}
+    @media(max-width:520px){.floating-whatsapp{left:.8rem;bottom:.9rem;padding:.77rem .95rem;font-size:.78rem}#back-to-top{right:.8rem;bottom:.9rem;width:44px;height:44px}}
+  </style>
+</head>
+<body>
+
+<!-- ELEMENTOS DE FONDO -->
+<div class="grid-pattern"></div>
+<div class="dots-overlay"></div>
+
+<!-- NAVBAR -->
+<header>
+  <div class="ctr">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-ic"><i data-lucide="message-square" style="width:20px;height:20px"></i></div>
+        <div>
+          <span class="logo-nm">SOLUCIONES<span>WA</span></span>
+          <span class="logo-sub">Automatización Inteligente</span>
+        </div>
+      </a>
+      <nav id="site-nav">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#modulos">Parrilla de Servicios</a>
+        <a href="#seguridad">Seguridad</a>
+        <a href="#como-funciona">Cómo Funciona</a>
+        <a href="#precios">Planes Mensuales</a>
+        <a href="#faq">Preguntas</a>
+      </nav>
+            <button class="nav-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="site-nav">
+        <i data-lucide="menu" style="width:20px;height:20px"></i>
+      </button>
+      <a href="#precios" class="btn-p" style="padding:10px 24px;font-size:.74rem">
+        <i data-lucide="sparkles" style="width:14px;height:14px"></i>
+        Conocer Planes
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO PRINCIPAL -->
+<section class="hero">
+  <div class="ctr">
+    <div class="hero-content">
+
+      <div class="badge reveal vis" style="margin-bottom:1.5rem">
+        <span class="badge-dot"></span>
+        Mensajes Personalizados &middot; Prospección Automatizada &middot; Protección Antibloqueo
+      </div>
+
+      <div class="hero-ctas reveal vis" style="transition-delay:.24s">
+        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p">
+          <i data-lucide="message-circle" style="width:16px;height:16px"></i>
+          Solicitar Demostración
+        </a>
+        <a href="#modulos" class="btn-s">
+          Ver Parrilla de Servicios
+          <i data-lucide="arrow-down" style="width:16px;height:16px"></i>
+        </a>
+      </div>
+
+      <div class="benefit-strip reveal vis" style="transition-delay:.30s">
+        <div class="bs-item"><i data-lucide="user-check" style="width:16px;height:16px"></i><span>Mensajes 1 a 1 con Nombre</span></div>
+        <div class="bs-item"><i data-lucide="clock" style="width:16px;height:16px"></i><span>Ahorra Horas Diarias</span></div>
+        <div class="bs-item"><i data-lucide="shield-check" style="width:16px;height:16px"></i><span>Protección para tus Líneas</span></div>
+        <div class="bs-item"><i data-lucide="calendar" style="width:16px;height:16px"></i><span>Planes Mensuales Flexibles</span></div>
+      </div>
+
+      <!-- HERO SHOWCASE CON IMAGEN PRINCIPAL -->
+      <div class="hero-showcase reveal vis" style="transition-delay:.36s" id="heroShowcase">
+        
+        <!-- Tarjeta flotante izquierda -->
+        <div class="float-card fc-top-left">
+          <div class="fc-icon">
+            <i data-lucide="users" style="width:20px;height:20px"></i>
+          </div>
+          <div>
+            <div class="fc-title">Contacto Cercano y Personal</div>
+            <div class="fc-desc">Cada cliente recibe su nombre y datos</div>
+          </div>
+        </div>
+
+        <!-- Marco principal con la animación del robot -->
+        <div class="hero-main-frame" id="heroFrame">
+          <video id="heroVideo" class="hero-robot-video" muted playsinline preload="auto" poster="robot-hero-poster.jpg" aria-label="Robot animado de Soluciones WA, con movimiento controlado por el cursor"><source src="robot-hero.mp4" type="video/mp4">Tu navegador no puede reproducir este video.</video>
+<div class="hero-copy-overlay">
+  <h1>AUTOMATIZA TUS VENTAS POR WHATSAPP</h1>
+  <p>Encuentra prospectos calificados, personaliza cada mensaje y acelera el cierre de tus ventas.</p>
+</div>
+          <div id="robotInteractionCue" class="robot-interaction-cue" aria-live="polite" aria-atomic="true">
+            <i data-lucide="mouse-pointer-2" class="cue-pointer" style="width:18px;height:18px"></i>
+            <span class="cue-idle">Pasa el cursor sobre el robot</span>
+            <span class="cue-active">¡Ahora muévelo a izquierda y derecha!</span>
+            <span class="cue-touch">Desliza a ambos lados para moverlo</span>
+            <i data-lucide="arrow-left-right" class="cue-arrows" style="width:17px;height:17px"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- BENEFICIOS REALES -->
+<section id="beneficios" class="beneficios">
+  <div class="ctr">
+    <div class="sh reveal">
+      <span class="badge">¿Qué Gana Tu Negocio?</span>
+      <h2>Resultados Concretos para Impulsar tus Ventas</h2>
+      <p>Diseñado para comerciantes, agencias y profesionales que necesitan conectar con más personas en menos tiempo.</p>
+    </div>
+
+    <div class="bg-cards">
+
+      <!-- BENEFICIO 1: CERCANÍA Y PERSONALIZACIÓN -->
+      <div class="b-card reveal">
+        <div class="b-icon"><i data-lucide="heart-handshake" style="width:24px;height:24px"></i></div>
+        <h3>Cercanía y Personalización Total</h3>
+        <p>Llega a cientos de personas haciéndolas sentir únicas. Incluye el nombre de tu cliente, el producto de su interés o información específica en cada mensaje para lograr respuestas inmediatas y reales.</p>
+        <div class="b-highlight"><i data-lucide="check" style="width:14px;height:14px"></i>Tasa de respuesta mucho más alta</div>
+      </div>
+
+      <!-- BENEFICIO 2: AHORRO DE TIEMPO -->
+      <div class="b-card reveal" style="transition-delay:.1s">
+        <div class="b-icon"><i data-lucide="timer" style="width:24px;height:24px"></i></div>
+        <h3>Ahorro Masivo de Tiempo Diario</h3>
+        <p>Olvídate de redactar y enviar mensajes uno por uno durante toda la jornada. Carga tu lista, programa tu campaña y deja que el sistema trabaje mientras tú te enfocas en atender a los clientes interesados.</p>
+        <div class="b-highlight"><i data-lucide="check" style="width:14px;height:14px"></i>Recupera más de 4 horas al día</div>
+      </div>
+
+      <!-- BENEFICIO 3: PROSPECCIÓN ACTIVA -->
+      <div class="b-card reveal" style="transition-delay:.2s">
+        <div class="b-icon"><i data-lucide="map-pin" style="width:24px;height:24px"></i></div>
+        <h3>Prospección Continua de Nuevos Clientes</h3>
+        <p>Encuentra comercios, empresas y profesionales de tu sector filtrados por ciudad y nicho. Construye bases de contactos frescas y actualizadas listas para recibir tus propuestas comerciales.</p>
+        <div class="b-highlight"><i data-lucide="check" style="width:14px;height:14px"></i>Flujo constante de prospectos nuevos</div>
+      </div>
+
+      <!-- BENEFICIO 4: COMUNIDAD Y DIFUSIÓN EN GRUPOS -->
+      <div class="b-card reveal" style="transition-delay:.3s">
+        <div class="b-icon"><i data-lucide="message-circle" style="width:24px;height:24px"></i></div>
+        <h3>Máximo Alcance en Grupos y Canales</h3>
+        <p>Publica tus promociones y ofertas en múltiples grupos simultáneamente variando el texto de forma inteligente. Mantén a tu audiencia informada con catálogos, fotos y enlaces en un solo paso.</p>
+        <div class="b-highlight"><i data-lucide="check" style="width:14px;height:14px"></i>Comunidades siempre activas</div>
+      </div>
+
+      <!-- BENEFICIO 5: FILTRADO INTELIGENTE -->
+      <div class="b-card reveal" style="transition-delay:.4s">
+        <div class="b-icon"><i data-lucide="filter-check" style="width:24px;height:24px"></i></div>
+        <h3>Listas Limpias sin Números Inválidos</h3>
+        <p>Verifica previamente qué contactos tienen cuenta activa de WhatsApp. Evitas enviar a números inexistentes, ahorras tiempo y mantienes tus listas depuradas con alta efectividad.</p>
+        <div class="b-highlight"><i data-lucide="check" style="width:14px;height:14px"></i>100% de contactos efectivos</div>
+      </div>
+
+      <!-- BENEFICIO 6: PROTECCIÓN Y TRANQUILIDAD -->
+      <div class="b-card reveal" style="transition-delay:.5s">
+        <div class="b-icon"><i data-lucide="shield-check" style="width:24px;height:24px"></i></div>
+        <h3>Seguridad Diseñada para Cuidar tus Líneas</h3>
+        <p>El sistema incorpora intervalos dinámicos de espera, textos rotativos y calentadores de números que simulan el comportamiento de una persona escribiendo, protegiendo la reputación de tu chip.</p>
+        <div class="b-highlight"><i data-lucide="check" style="width:14px;height:14px"></i>Paz mental en cada campaña</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- PARRILLA DE SERVICIOS REAL (PRO vs PLUS) -->
+<section id="modulos" class="modulos">
+  <div class="ctr">
+    <div class="sh reveal">
+      <span class="badge">Parrilla Oficial de Servicios</span>
+      <h2>Módulos y Capacidades del Sistema</h2>
+      <p>Organizados exactamente según el flujo de trabajo de la suite, con especificación clara de entrada y salida de datos.</p>
+    </div>
+
+    <div class="plan-switch-banner reveal">
+      <div class="ps-info">
+        <i data-lucide="layers" style="width:20px;height:20px;color:var(--brand)"></i>
+        <span><strong>Plan PRO:</strong> Envíos, extracción de grupos y miembros, y calentador para 1 línea &middot; <strong>Plan PLUS:</strong> Todo PRO + multicuenta, Google Maps, filtros de grupos y líneas, agregador y calentador en malla completa</span>
+      </div>
+      <a href="#precios" class="btn-s" style="padding:8px 18px;font-size:.76rem">Ver Tabla Comparativa</a>
+    </div>
+
+    <!-- CATEGORÍA 1: DESPACHO Y ENVÍOS MASIVOS -->
+    <div class="mod-cat-title reveal">
+      <i data-lucide="send" style="width:22px;height:22px;color:var(--brand)"></i>
+      <span>Despacho y Envíos Masivos</span>
+      <span class="mod-cat-badge">3 Módulos</span>
+    </div>
+
+    <div class="mg reveal">
+
+      <!-- MÓDULO 1: GRUPOS (PRO) -->
+      <div class="mc">
+        <div>
+          <div class="mh">
+            <div class="mic"><i data-lucide="users-2" style="width:20px;height:20px"></i></div>
+            <span class="mt tpro">Plan PRO</span>
+          </div>
+          <h3>Envío Masivo de mensajes a Grupos de Whatsapp</h3>
+          <p>Difusión programada a comunidades y grupos vinculados con motor spintax rotativo, soporte multi-adjuntos y pausas estocásticas.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl">ENTRADA:</span>
+              <span class="io-val">Carga Excel de Grupos</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl">SALIDA:</span>
+              <span class="io-val">Descarga reporte de entrega</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 2: ROUND-ROBIN (PLUS) -->
+      <div class="mc card-plus">
+        <div>
+          <div class="mh">
+            <div class="mic mic-plus"><i data-lucide="repeat" style="width:20px;height:20px"></i></div>
+            <span class="mt tplus">Plan PLUS ⭐</span>
+          </div>
+          <h3>Despacho Multicuenta Round-Robin</h3>
+          <p>Distribución balanceada de prospectos entre 2 o más líneas activas mediante micro-lotes de 5, presencia humana y enfriamientos.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl plus">ENTRADA:</span>
+              <span class="io-val">Lista Unificada Excel + Múltiples Cuentas</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl plus">SALIDA:</span>
+              <span class="io-val">Despacho Anti-Bloqueo Distribuido</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 3: CONTACTOS (PRO) -->
+      <div class="mc">
+        <div>
+          <div class="mh">
+            <div class="mic"><i data-lucide="user-check" style="width:20px;height:20px"></i></div>
+            <span class="mt tpro">Plan PRO</span>
+          </div>
+          <h3>Envío masivo de mensajes a Contactos</h3>
+          <p>Emisión directa y personalizada por columnas desde Excel con variables dinámicas, pausas humanas y rotación multi-cuenta.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl">ENTRADA:</span>
+              <span class="io-val">Carga Excel Contactos</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl">SALIDA:</span>
+              <span class="io-val">Descarga reporte de despacho</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORÍA 2: EXTRACCIÓN, MINERÍA Y VALIDACIÓN -->
+    <div class="mod-cat-title reveal" style="margin-top:3.6rem">
+      <i data-lucide="database" style="width:22px;height:22px;color:var(--plus-color)"></i>
+      <span>Extracción, Minería y Validación</span>
+      <span class="mod-cat-badge" style="background:rgba(0,229,163,0.1);color:var(--plus-color);border-color:rgba(0,229,163,0.25)">4 Módulos</span>
+    </div>
+
+    <div class="mg reveal">
+
+      <!-- MÓDULO 4: GOOGLE MAPS (PLUS) -->
+      <div class="mc card-plus">
+        <div>
+          <div class="mh">
+            <div class="mic mic-plus"><i data-lucide="map-pin" style="width:20px;height:20px"></i></div>
+            <span class="mt tplus">Plan PLUS ⭐</span>
+          </div>
+          <h3>Extractor Google Maps</h3>
+          <p>Minería directa de establecimientos y empresas por cuadrícula geográfica y nicho comercial sin costos de APIs externas.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl plus">ENTRADA:</span>
+              <span class="io-val">Palabra Clave + Ciudad</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl plus">SALIDA:</span>
+              <span class="io-val">Descarga Excel (.xlsx) con teléfonos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 5: EXTRACTOR DE GRUPOS (PRO) -->
+      <div class="mc">
+        <div>
+          <div class="mh">
+            <div class="mic"><i data-lucide="folder-search" style="width:20px;height:20px"></i></div>
+            <span class="mt tpro">Plan PRO</span>
+          </div>
+          <h3>Extractor de Grupos de WhatsApp</h3>
+          <p>Ubica todos los grupos de la línea conectada tal como están y los descarga a Excel. Sin filtros ni depuración: extracción pura.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl">ENTRADA:</span>
+              <span class="io-val">Sesión WhatsApp Activa (línea conectada)</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl">SALIDA:</span>
+              <span class="io-val">Descarga Excel (.xlsx) con los grupos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 6: FILTRO GRUPOS Y COMUNIDADES (PLUS) -->
+      <div class="mc card-plus">
+        <div>
+          <div class="mh">
+            <div class="mic mic-plus"><i data-lucide="filter" style="width:20px;height:20px"></i></div>
+            <span class="mt tplus">Plan PLUS ⭐</span>
+          </div>
+          <h3>Filtro Grupos y Comunidades</h3>
+          <p>Censa e identifica todos los grupos donde la línea participa, exportando el inventario de identificadores JID.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl plus">ENTRADA:</span>
+              <span class="io-val">Sesión WhatsApp Activa</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl plus">SALIDA:</span>
+              <span class="io-val">Descarga Excel (.xlsx) de Grupos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 7: EXTRACTOR MIEMBROS DE GRUPOS (PRO) -->
+      <div class="mc">
+        <div>
+          <div class="mh">
+            <div class="mic"><i data-lucide="user-plus" style="width:20px;height:20px"></i></div>
+            <span class="mt tpro">Plan PRO</span>
+          </div>
+          <h3>Extractor Miembros de grupos de WhatsApp</h3>
+          <p>Extracción estructurada de participantes de grupos seleccionados con discriminación de administradores y guardado en Excel.</p>
+          
+          <div class="io-box">
+            <div class="io-row">
+              <span class="io-lbl">ENTRADA:</span>
+              <span class="io-val">Selección de grupo</span>
+            </div>
+            <div class="io-row">
+              <span class="io-lbl">SALIDA:</span>
+              <span class="io-val">Descarga Excel con participantes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORÍA 3: GESTIÓN DE CUENTAS, REPUTACIÓN Y AUDIENCIAS -->
+    <div class="mod-cat-title reveal" style="margin-top:3.6rem">
+      <i data-lucide="shield-check" style="width:22px;height:22px;color:var(--brand)"></i>
+      <span>Gestión de Cuentas, Reputación y Audiencias</span>
+      <span class="mod-cat-badge">3 Módulos</span>
+    </div>
+
+    <div class="mg reveal">
+      <!-- MÓDULO 8: CALENTADOR (PRO) -->
+      <div class="mc">
+        <div>
+          <div class="mh">
+            <div class="mic"><i data-lucide="activity" style="width:20px;height:20px"></i></div>
+            <span class="mt tpro">Plan PRO</span>
+          </div>
+          <h3>Calentador de Números WhatsApp</h3>
+          <p>Simulación de conversaciones entre líneas propias, con diálogos automáticos y tiempos estocásticos para ayudar a madurar la reputación de tus números.</p>
+          <div class="io-box">
+            <div class="io-row"><span class="io-lbl">ENTRADA:</span><span class="io-val">Malla de Números Conectados</span></div>
+            <div class="io-row"><span class="io-lbl">SALIDA:</span><span class="io-val">Telemetría de Maduración en Vivo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 9: VALIDADOR DE LÍNEAS (PLUS) -->
+      <div class="mc card-plus">
+        <div>
+          <div class="mh">
+            <div class="mic mic-plus"><i data-lucide="list-checks" style="width:20px;height:20px"></i></div>
+            <span class="mt tplus">Plan PLUS ⭐</span>
+          </div>
+          <h3>Validador / Filtro de Líneas</h3>
+          <p>Verificación de cuentas de WhatsApp activas sobre bases de contactos para depurar la lista y reducir rebotes en tus campañas.</p>
+          <div class="io-box">
+            <div class="io-row"><span class="io-lbl plus">ENTRADA:</span><span class="io-val">Excel de Teléfonos en Bruto</span></div>
+            <div class="io-row"><span class="io-lbl plus">SALIDA:</span><span class="io-val">Excel Depurado (Solo Activos)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 10: AGREGADOR A GRUPOS (PLUS) -->
+      <div class="mc card-plus">
+        <div>
+          <div class="mh">
+            <div class="mic mic-plus"><i data-lucide="user-round-plus" style="width:20px;height:20px"></i></div>
+            <span class="mt tplus">Plan PLUS ⭐</span>
+          </div>
+          <h3>Agregar Contactos a Mis Grupos</h3>
+          <p>Inclusión escalonada de contactos depurados en tus grupos, con pausas inteligentes para reducir el riesgo de restricciones.</p>
+          <div class="io-box">
+            <div class="io-row"><span class="io-lbl plus">ENTRADA:</span><span class="io-val">Grupo Destino + Lista Válida</span></div>
+            <div class="io-row"><span class="io-lbl plus">SALIDA:</span><span class="io-val">Reporte de Miembros Incorporados</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- BENEFICIARIOS Y PERSONALIZACIÓN -->
+<section id="personalizacion" class="personalizacion">
+  <div class="ctr personal-grid">
+    <div class="personal-copy reveal">
+      <span class="badge"><span class="badge-dot"></span> Mensajes que hablan de cada persona</span>
+      <h2>Un mensaje personal se siente distinto</h2>
+      <p class="personal-lead">Adapta cada envío a las columnas de tu Excel y a lo que necesita tu negocio: un saludo cercano, el nombre de la persona, un número de factura, una cita o cualquier dato que corresponda.</p>
+      <div class="personal-example">
+        <div class="personal-example-head"><i data-lucide="sparkles" style="width:16px;height:16px"></i><span>Un ejemplo personalizable</span></div>
+        <p>Hola, <strong>{{Nombre}}</strong> 👋<br>Te escribimos sobre tu factura <strong>{{N.º de factura}}</strong>, con vencimiento el <strong>{{Fecha}}</strong>.</p>
+        <span class="personal-example-foot">Los campos se ajustan a tus datos y requisitos</span>
+      </div>
+      <div class="beneficiary-block">
+        <h3>¿A quién puede ayudar?</h3>
+        <div class="beneficiary-tags">
+          <span><i data-lucide="heart-pulse"></i> Consultorios y profesionales de salud</span>
+          <span><i data-lucide="scale"></i> Abogados y firmas jurídicas</span>
+          <span><i data-lucide="key-round"></i> Finca raíz e inmobiliarias</span>
+          <span><i data-lucide="shopping-bag"></i> Comercios y equipos de ventas</span>
+          <span><i data-lucide="wrench"></i> Servicios técnicos y profesionales</span>
+          <span><i data-lucide="calendar-days"></i> Academias, eventos y servicios con citas</span>
+        </div>
+      </div>
+      <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p personal-cta">
+        <i data-lucide="message-circle" style="width:18px;height:18px"></i>
+        Consultar por WhatsApp
+      </a>
+    </div>
+    <div class="personal-visual reveal" role="img" aria-label="Ilustración de una hoja con nombre y número de factura que se convierten en un mensaje personalizado">
+      <svg viewBox="0 0 620 500" class="personal-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="personalGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00c2cb" stop-opacity=".28"/><stop offset="1" stop-color="#00e5a3" stop-opacity=".08"/></linearGradient>
+          <linearGradient id="messageGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b554c"/><stop offset="1" stop-color="#103b3b"/></linearGradient>
+          <filter id="softShadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".35"/></filter>
+        </defs>
+        <circle cx="318" cy="248" r="204" fill="url(#personalGlow)"/>
+        <circle cx="318" cy="248" r="178" fill="none" stroke="#55ded6" stroke-opacity=".11" stroke-dasharray="4 10"/>
+        <g filter="url(#softShadow)" transform="rotate(-7 172 245)">
+          <rect x="39" y="101" width="265" height="294" rx="20" fill="#101a2b" stroke="#385064" stroke-width="2"/>
+          <rect x="39" y="101" width="265" height="52" rx="20" fill="#15243a"/>
+          <path d="M39 133h265v20H39z" fill="#15243a"/>
+          <rect x="61" y="118" width="18" height="18" rx="4" fill="#00b884"/>
+          <path d="M66 123h8M66 127h8M66 131h8" stroke="#eafff8" stroke-width="1.5"/>
+          <text x="88" y="132" fill="#eaf2fa" font-family="Arial,sans-serif" font-size="14" font-weight="700">Base de contactos</text>
+          <rect x="59" y="171" width="225" height="34" rx="6" fill="#183247"/>
+          <text x="71" y="193" fill="#9db2c6" font-family="Arial,sans-serif" font-size="11" font-weight="700">NOMBRE</text>
+          <text x="172" y="193" fill="#9db2c6" font-family="Arial,sans-serif" font-size="11" font-weight="700">FACTURA</text>
+          <path d="M59 214h225M59 252h225M59 290h225M59 328h225M151 171v176" stroke="#293c50" stroke-width="1"/>
+          <text x="70" y="238" fill="#dce8f2" font-family="Arial,sans-serif" font-size="12">Laura</text><text x="166" y="238" fill="#55ded6" font-family="Arial,sans-serif" font-size="12">F-2048</text>
+          <text x="70" y="276" fill="#dce8f2" font-family="Arial,sans-serif" font-size="12">Andrés</text><text x="166" y="276" fill="#55ded6" font-family="Arial,sans-serif" font-size="12">F-2051</text>
+          <text x="70" y="314" fill="#dce8f2" font-family="Arial,sans-serif" font-size="12">Camila</text><text x="166" y="314" fill="#55ded6" font-family="Arial,sans-serif" font-size="12">F-2056</text>
+          <rect x="59" y="358" width="103" height="20" rx="10" fill="#0f715c" fill-opacity=".33"/><text x="72" y="372" fill="#7ef0c5" font-family="Arial,sans-serif" font-size="10" font-weight="700">CAMPOS LISTOS</text>
+        </g>
+        <path d="M285 249h72" stroke="#55ded6" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 8"/>
+        <circle cx="323" cy="249" r="21" fill="#0e2231" stroke="#55ded6" stroke-opacity=".65"/>
+        <path d="M315 249h15m-6-6 6 6-6 6" fill="none" stroke="#7fffe2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g filter="url(#softShadow)">
+          <rect x="361" y="74" width="220" height="352" rx="32" fill="#111b2a" stroke="#52677a" stroke-width="2"/>
+          <rect x="375" y="92" width="192" height="318" rx="22" fill="#0a111c"/>
+          <rect x="375" y="92" width="192" height="55" rx="22" fill="#16243a"/>
+          <path d="M375 125h192v22H375z" fill="#16243a"/>
+          <circle cx="401" cy="119" r="13" fill="#0e8f76"/><path d="M395 120q6-8 12 0M397 124q4-5 8 0" fill="none" stroke="#dcfff4" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="422" y="116" fill="#e9f2f8" font-family="Arial,sans-serif" font-size="12" font-weight="700">Tu negocio</text>
+          <text x="422" y="132" fill="#91a7b9" font-family="Arial,sans-serif" font-size="9">mensaje personalizado</text>
+          <rect x="388" y="163" width="156" height="195" rx="16" fill="url(#messageGlow)" stroke="#52dcc5" stroke-opacity=".24"/>
+          <text x="403" y="190" fill="#ecfff9" font-family="Arial,sans-serif" font-size="12">Hola, Laura 👋</text>
+          <text x="403" y="220" fill="#c5ddd7" font-family="Arial,sans-serif" font-size="10">Te escribimos sobre tu</text>
+          <text x="403" y="237" fill="#c5ddd7" font-family="Arial,sans-serif" font-size="10">factura F-2048, con</text>
+          <text x="403" y="254" fill="#c5ddd7" font-family="Arial,sans-serif" font-size="10">vencimiento el 30 de</text>
+          <text x="403" y="271" fill="#c5ddd7" font-family="Arial,sans-serif" font-size="10">septiembre.</text>
+          <rect x="401" y="291" width="96" height="22" rx="11" fill="#0a312f" stroke="#55ded6" stroke-opacity=".34"/>
+          <text x="414" y="306" fill="#78ead5" font-family="Arial,sans-serif" font-size="9" font-weight="700">NOMBRE + FACTURA</text>
+          <text x="514" y="342" fill="#8ab9a9" font-family="Arial,sans-serif" font-size="9">10:42 ✓✓</text>
+          <rect x="390" y="375" width="160" height="22" rx="11" fill="#152238"/>
+          <circle cx="403" cy="386" r="5" fill="#00e5a3"/><text x="414" y="390" fill="#a9bbca" font-family="Arial,sans-serif" font-size="9">Cada registro, su mensaje</text>
+        </g>
+      </svg>
+      <div class="visual-caption"><i data-lucide="workflow" style="width:16px;height:16px"></i> De tus columnas a una comunicación más cercana</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGURIDAD Y CONTROL -->
+<section id="seguridad" class="seguridad">
+  <div class="ctr">
+    <div class="seg-grid">
+      <div class="seg-content reveal">
+        <span class="badge" style="margin-bottom:1.2rem">Control y Seguridad</span>
+        <h2>Tus contactos y conversaciones bajo tu resguardo</h2>
+        <p>Entendemos que tu cartera de clientes es tu activo más valioso. Por eso nuestra suite te da el control absoluto sin intermediarios que comprometan tu información.</p>
+        <ul class="seg-list">
+          <li>
+            <div class="seg-check"><i data-lucide="lock" style="width:16px;height:16px"></i></div>
+            <div>
+              <h4>Privacidad Absoluta</h4>
+              <p>El tratamiento de tus bases y contactos debe ajustarse a la configuración real del sistema y a la política de datos aplicable.</p>
+            </div>
+          </li>
+          <li>
+            <div class="seg-check"><i data-lucide="file-spreadsheet" style="width:16px;height:16px"></i></div>
+            <div>
+              <h4>Manejo Directo con Excel</h4>
+              <p>Carga y descarga tus listas en tus formatos habituales (.xlsx y .csv). Sin pasos técnicos ni procesos engorrosos.</p>
+            </div>
+          </li>
+          <li>
+            <div class="seg-check"><i data-lucide="calendar-check" style="width:16px;height:16px"></i></div>
+            <div>
+              <h4>Planes Mensuales Flexibles</h4>
+              <p>Adquiere tu licencia por el mes que desees. Renueva a tu conveniencia sin cláusulas de permanencia ni cobros automáticos ocultos.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="seg-img-wrap reveal" style="transition-delay:.15s">
+        <img src="C:/Users/GACB-/.gemini/antigravity-ide/brain/554f6484-81c4-4ade-934b-96e869a68f3c/privacy_shield_1790268098327.jpg"
+             alt="Seguridad y resguardo de datos en SOLUCIONES WA"
+             loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona" class="pasos">
+  <div class="ctr-sm">
+    <div class="sh reveal">
+      <span class="badge">Flujo Sencillo</span>
+      <h2>Comienza a Operar en 3 Pasos</h2>
+      <p>Un proceso directo y práctico para empezar a generar contactos sin configuraciones complicadas.</p>
+    </div>
+    <div class="sg">
+      <div class="sc reveal">
+        <div class="sn">1</div>
+        <h3>Conecta tu WhatsApp</h3>
+        <p>Inicia la aplicación y escanea el código QR desde tu teléfono, tal como lo haces con WhatsApp Web. Listo en pocos segundos.</p>
+      </div>
+      <div class="sc reveal" style="transition-delay:.15s">
+        <div class="sn">2</div>
+        <h3>Prepara tus Contactos</h3>
+        <p>Importa tu lista de Excel, busca prospectos en Google Maps o extrae integrantes de grupos con discriminación de administradores.</p>
+      </div>
+      <div class="sc reveal" style="transition-delay:.30s">
+        <div class="sn">3</div>
+        <h3>Lanza tu Campaña</h3>
+        <p>Configura tu mensaje con variables dinámicas, define los tiempos de pausa e inicia la difusión. Concéntrate en atender a los interesados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- MÉTRICAS ANIMADAS -->
+<section class="metr">
+  <div class="ctr">
+    <div class="mg2">
+      <div class="reveal" style="text-align:center">
+        <div class="mv" data-target="4" data-suffix="h+">4h+</div>
+        <div class="ml">Ahorro de Tiempo al Día</div>
+      </div>
+      <div class="reveal" style="text-align:center;transition-delay:.1s">
+        <div class="mv teal" data-target="100" data-suffix="%">100%</div>
+        <div class="ml">Control de tus Datos</div>
+      </div>
+      <div class="reveal" style="text-align:center;transition-delay:.2s">
+        <div class="mv" data-target="5" data-suffix="x">5×</div>
+        <div class="ml">Mayor Alcance de Prospectos</div>
+      </div>
+      <div class="reveal" style="text-align:center;transition-delay:.3s">
+        <div class="mv teal" data-target="100" data-suffix="%">100%</div>
+        <div class="ml">Planes Mensuales Flexibles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- TESTIMONIALES -->
+<section class="testi">
+  <div class="ctr">
+    <div class="sh reveal">
+      <span class="badge">Experiencias de Usuarios</span>
+      <h2>Negocios que Optimizan su Prospección</h2>
+      <p>Casos prácticos de equipos comerciales que mejoraron sus resultados de contacto.</p>
+    </div>
+    <div class="tg">
+      <div class="tc reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="tt">"Poder extraer talleres mecánicos por ciudad con Google Maps y mandarles una propuesta personalizada con su nombre nos abrió 8 cuentas nuevas en una semana. El ahorro de tiempo es impresionante."</p>
+        <div class="ta">
+          <div class="tav">CR</div>
+          <div><div class="tn">Carlos Rodríguez</div><div class="tr">Distribución de Autopartes &middot; Medellín</div></div>
+        </div>
+      </div>
+      <div class="tc reveal" style="transition-delay:.12s">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="tt">"El envío con pausas aleatorias y la extracción de miembros de grupos nos dieron prospectos de alto interés. Llevamos meses haciendo difusiones comerciales con total efectividad."</p>
+        <div class="ta">
+          <div class="tav">ML</div>
+          <div><div class="tn">María Elena López</div><div class="tr">Sector Inmobiliario &middot; Bogotá</div></div>
+        </div>
+      </div>
+      <div class="tc reveal" style="transition-delay:.24s">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="tt">"Manejar todo con nuestras propias hojas de cálculo y saber que la información no depende de servicios extraños nos da total tranquilidad. El plan mensual es muy práctico y accesible."</p>
+        <div class="ta">
+          <div class="tav">JM</div>
+          <div><div class="tn">Jhon Alexander Martínez</div><div class="tr">Comercialización B2B &middot; Cali</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- PLANES Y TABLA COMPARATIVA REAL -->
+<section id="precios" class="precios">
+  <div class="ctr">
+    <div class="sh reveal">
+      <span class="badge">Opciones Disponibles</span>
+      <h2>Elige el Plan Adecuado para tu Negocio</h2>
+      <p>Suscripción mensual flexible sin cláusulas de permanencia. Elige el plan que se adapte a tu volumen de operación.</p>
+    </div>
+
+    <!-- TARJETAS -->
+    <div class="pricing-cards-grid reveal">
+      <!-- PLAN PRO -->
+      <div class="plan-box">
+        <div>
+          <div class="plan-header">
+            <h3>PLAN PRO</h3>
+            <p>Pensado para profesionales y pequeños negocios que operan con 1 línea de WhatsApp y desean automatizar sus mensajes y contactos.</p>
+          </div>
+          <div class="plan-rate">
+            <span class="amount">Plan Mensual</span>
+            <span class="period">/ suscripción flexible</span>
+          </div>
+          <ul class="plan-feats">
+            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Envío Masivo de mensajes a Grupos de WhatsApp</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Envío masivo de mensajes a Contactos</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Extractor de Grupos de WhatsApp</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Extractor Miembros de grupos de WhatsApp</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Calentador de Números WhatsApp</span></li>
+          </ul>
+        </div>
+        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PRO" target="_blank" rel="noopener noreferrer" class="btn-s" style="width:100%;justify-content:center;font-weight:700">
+          Adquirir PRO
+        </a>
+      </div>
+
+      <!-- PLAN PLUS -->
+      <div class="plan-box plus-featured">
+        <span class="plan-tag-rec">⭐ Más Completo</span>
+        <div>
+          <div class="plan-header">
+            <h3 style="color:var(--plus-color)">PLAN PLUS</h3>
+            <p>La opción recomendada para empresas y equipos de ventas que requieren alto volumen de prospección, rotación multilínea y minería avanzada.</p>
+          </div>
+          <div class="plan-rate">
+            <span class="amount" style="color:var(--plus-color)">Plan Mensual</span>
+            <span class="period">/ suscripción flexible</span>
+          </div>
+          <ul class="plan-feats">
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Incluye las cinco funciones del Plan PRO</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Despacho Multicuenta Round-Robin</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Extractor Google Maps</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Filtro Grupos y Comunidades</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Validador / Filtro de Líneas</span></li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Agregar Contactos a Mis Grupos</span></li>
+          </ul>
+        </div>
+        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PLUS" target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;background:var(--plus-color);color:#04141d;font-weight:700">
+          Adquirir PLUS
+        </a>
+      </div>
+    </div>
+
+    <!-- TABLA COMPARATIVA -->
+    <div class="ptw reveal">
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;width:48%">MÓDULO O BENEFICIO COMERCIAL</th>
+              <th class="cp" style="width:26%">PLAN PRO</th>
+              <th class="cpl" style="width:26%">PLAN PLUS (RECOMENDADO)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">Envío Masivo de mensajes a Grupos de WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
+              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Envío masivo de mensajes a Contactos<span class="tier-pill tier-pro">PRO</span></td>
+              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Extractor de Grupos de WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
+              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Extractor Miembros de grupos de WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
+              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Calentador de Números WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
+              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Despacho Multicuenta Round-Robin<span class="tier-pill tier-plus">PLUS</span></td>
+              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Extractor Google Maps<span class="tier-pill tier-plus">PLUS</span></td>
+              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Filtro Grupos y Comunidades<span class="tier-pill tier-plus">PLUS</span></td>
+              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Validador / Filtro de Líneas<span class="tier-pill tier-plus">PLUS</span></td>
+              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Agregar Contactos a Mis Grupos<span class="tier-pill tier-plus">PLUS</span></td>
+              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
+              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <span class="fnote">Todas las licencias incluyen soporte técnico de instalación y actualizaciones de compatibilidad.</span>
+              </td>
+              <td style="text-align:center;padding:1.4rem">
+                <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PRO" target="_blank" rel="noopener noreferrer" class="btn-s" style="width:100%;justify-content:center;padding:10px 16px;font-size:.85rem;font-weight:700">Adquirir PRO</a>
+              </td>
+              <td style="text-align:center;padding:1.4rem;background:rgba(0,229,163,0.04)">
+                <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PLUS" target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;padding:10px 16px;font-size:.85rem;font-weight:700;background:var(--plus-color);color:#04141d">Adquirir PLUS</a>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- GARANTÍAS -->
+<section class="gar">
+  <div class="ctr">
+    <div class="sh reveal">
+      <span class="badge">Nuestros Compromisos</span>
+      <h2>Respaldo y Seguridad para Tu Equipo</h2>
+    </div>
+    <div class="gg">
+      <div class="gc reveal">
+        <div class="gi"><i data-lucide="headset" style="width:26px;height:26px"></i></div>
+        <h4>Instalación Asistida</h4>
+        <p>Te guiamos en la puesta en marcha para que comiences a utilizar las herramientas con confianza.</p>
+      </div>
+      <div class="gc reveal" style="transition-delay:.1s">
+        <div class="gi"><i data-lucide="refresh-cw" style="width:26px;height:26px"></i></div>
+        <h4>Actualizaciones de Compatibilidad</h4>
+        <p>Mantenemos la aplicación sincronizada con los cambios y versiones de WhatsApp Web.</p>
+      </div>
+      <div class="gc reveal" style="transition-delay:.2s">
+        <div class="gi"><i data-lucide="shield" style="width:26px;height:26px"></i></div>
+        <h4>Confidencialidad de Datos</h4>
+        <p>Tu información comercial y listas de clientes permanecen bajo tu custodia directa.</p>
+      </div>
+      <div class="gc reveal" style="transition-delay:.3s">
+        <div class="gi"><i data-lucide="calendar" style="width:26px;height:26px"></i></div>
+        <h4>Flexibilidad Mensual</h4>
+        <p>Pagas el mes que requieras sin contratos a largo plazo ni compromisos forzosos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="ctr-sm">
+    <div class="sh reveal">
+      <span class="badge">Dudas Frecuentes</span>
+      <h2>Información Clara para Resolver tus Consultas</h2>
+    </div>
+    <div class="fl reveal">
+
+      <div class="fi">
+        <button class="fq" type="button" aria-expanded="false" onclick="tfaq(this)">
+          <span>¿Cómo se gestiona el acceso y la suscripción mensual?</span>
+          <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+        </button>
+        <div class="fa">
+          <div class="fai">
+            El servicio se adquiere por periodos mensuales para el plan que elijas (PRO o PLUS). No hay contratos forzosos ni cargos adicionales por mensaje enviado. Puedes renovar mes a mes según las necesidades de tu ciclo comercial.
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" type="button" aria-expanded="false" onclick="tfaq(this)">
+          <span>¿Cómo se protegen los números durante las difusiones?</span>
+          <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+        </button>
+        <div class="fa">
+          <div class="fai">
+            La plataforma incluye varias medidas de seguridad: personalización mediante variables dinámicas para evitar textos idénticos, intervalos de pausa estocásticos entre envíos y, en el Plan PLUS, distribución multicuenta Round-Robin en micro-lotes de 5 para rotar la carga entre diferentes chips con presencia humana.
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" type="button" aria-expanded="false" onclick="tfaq(this)">
+          <span>¿El extractor de Google Maps requiere pagar tarifas de API externas?</span>
+          <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+        </button>
+        <div class="fa">
+          <div class="fai">
+            No. El módulo extractor incluido en el Plan PLUS recopila la información de comercios directamente por cuadrícula geográfica y nicho comercial, sin necesidad de adquirir cuentas de desarrollador ni pagar costos por cada consulta realizada.
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" type="button" aria-expanded="false" onclick="tfaq(this)">
+          <span>¿Qué requerimientos técnicos son necesarios?</span>
+          <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+        </button>
+        <div class="fa">
+          <div class="fai">
+            Funciona en computadoras con Windows 10 u 11, navegador Google Chrome y conexión a internet. No se requieren conocimientos avanzados de programación ni equipos con características especiales.
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" type="button" aria-expanded="false" onclick="tfaq(this)">
+          <span>¿Recibo apoyo para la puesta en marcha?</span>
+          <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+        </button>
+        <div class="fa">
+          <div class="fai">
+            Sí. Nuestro equipo te asiste en la instalación y configuración inicial para que puedas realizar tus primeras pruebas y familiarizarte con las funciones de la aplicación.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divl"></div>
+
+<!-- CTA FINAL -->
+<section id="contacto" class="ctaf">
+  <div class="ctr">
+    <div class="ctaf-c">
+      <div class="badge reveal" style="margin-bottom:1.5rem">
+        <span class="badge-dot"></span>
+        Atención y Asesoría Personalizada
+      </div>
+      <h2 class="reveal" style="transition-delay:.1s">
+        Comienza a Automatizar tus Ventas por WhatsApp
+      </h2>
+      <p class="reveal" style="transition-delay:.2s">
+        Comunícate con nuestro equipo para asesorarte sobre el plan ideal para tu negocio y resolver todas tus inquietudes.
+      </p>
+      <div class="reveal" style="transition-delay:.3s">
+        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p" style="font-size:.92rem;padding:17px 44px">
+          <i data-lucide="message-circle" style="width:22px;height:22px"></i>
+          Conversar con un Asesor por WhatsApp
+        </a>
+      </div>
+      <p class="ctan reveal" style="transition-delay:.4s">
+        <span>&#10003; Planes mensuales flexibles</span> &nbsp;&middot;&nbsp;
+        <span>&#10003; Acompañamiento en instalación</span> &nbsp;&middot;&nbsp;
+        <span>&#10003; Máxima privacidad para tus datos</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<a class="floating-whatsapp" href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp al +57 311 589 3220">
+  <i data-lucide="message-circle" style="width:21px;height:21px"></i><span>WhatsApp</span>
+</a>
+
+<button id="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">
+  <i data-lucide="arrow-up" style="width:20px;height:20px"></i>
+</button>
+
+<!-- REDES Y COMUNIDAD -->
+<section id="facebook" class="social-section">
+  <div class="ctr social-inner">
+    <div class="social-copy">
+      <span class="badge">Sigamos conectados</span>
+      <h2>¿Te gusta lo que estamos construyendo?</h2>
+      <p>Visita Datafast Marketing en Facebook, mira sus publicaciones y apóyanos con un “Me gusta”.</p>
+    </div>
+    <div class="facebook-like-card">
+      <div class="facebook-like-heading">
+        <span class="facebook-mark" aria-hidden="true">f</span>
+        <div><strong>Datafast Marketing</strong><small>Encuéntranos en Facebook</small></div>
+      </div>
+      <div class="facebook-plugin-wrap">
+        <iframe
+          title="Botón Me gusta y contador de Datafast Marketing en Facebook"
+          src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FDatafastMarketing&width=450&layout=button_count&action=like&size=large&share=false&height=80&locale=es_LA"
+          width="450" height="80" style="border:none;overflow:hidden;max-width:100%"
+          scrolling="no" frameborder="0" allow="encrypted-media; clipboard-write; web-share" loading="lazy">
+        </iframe>
+      </div>
+      <p class="facebook-note">El contador y el botón dependen de Facebook. Puede que tengas que iniciar sesión para dar Me gusta.</p>
+      <a class="facebook-open" href="https://www.facebook.com/DatafastMarketing" target="_blank" rel="noopener noreferrer">
+        Abrir página de Facebook <i data-lucide="arrow-up-right" style="width:15px;height:15px"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AVISOS LEGALES EN VENTANA EMERGENTE -->
+<dialog id="aviso-legal" class="legal-modal" aria-labelledby="legal-dialog-title">
+  <div class="legal-modal-shell">
+    <div class="legal-modal-top">
+      <div>
+        <span class="badge">Información importante</span>
+        <h2 id="legal-dialog-title">Aviso legal y tratamiento de datos</h2>
+      </div>
+      <button class="legal-close" type="button" aria-label="Cerrar aviso legal" data-close-legal>
+        <i data-lucide="x" style="width:20px;height:20px"></i>
+      </button>
+    </div>
+    <div class="legal-modal-scroll">
+  <div class="ctr legal-grid">
+    <article class="legal-card">
+      <span class="badge">Uso responsable</span>
+      <h2>Condiciones de uso y servicios de terceros</h2>
+      <p>Soluciones Digitales IA Studio ofrece herramientas de automatización y gestión. El cliente decide qué funciones activa, qué información introduce y con qué personas interactúa. Es responsable de configurar y supervisar sus operaciones conforme a la ley, a los derechos de terceros y a las condiciones de los servicios conectados.</p>
+      <h3>Listas, extracción y comunicaciones</h3>
+      <p>Antes de cargar, consultar, extraer, combinar, exportar o contactar a personas, el usuario debe verificar la fuente y la legitimidad del tratamiento; definir e informar una finalidad permitida; obtener y conservar la autorización cuando sea exigible o identificar la excepción legal aplicable; limitar los datos a lo necesario; protegerlos y atender las solicitudes de consulta, corrección, supresión o no contacto que correspondan.</p>
+      <p>La disponibilidad pública de un dato, la pertenencia a un grupo o la extracción mediante una función no equivalen automáticamente a autorización para reutilizarlo con fines comerciales. Calificar una actividad como educativa o didáctica tampoco la exime, por sí sola, de las reglas de protección de datos. No cargues datos sensibles ni información de menores salvo que exista una habilitación legal y garantías adecuadas.</p>
+      <h3>Meta, WhatsApp y otros servicios</h3>
+      <p>El usuario debe respetar las condiciones y políticas vigentes de cada servicio externo, incluidos los requisitos de consentimiento para contactar, la atención de solicitudes de baja y las restricciones sobre automatización y mensajería. Meta o WhatsApp pueden limitar o bloquear cuentas según sus propias políticas. Soluciones Digitales IA Studio no controla esas decisiones ni garantiza que una cuenta esté libre de restricciones, entregas o resultados determinados.</p>
+      <p>Soluciones Digitales IA Studio no certifica la procedencia de listas obtenidas o cargadas por el cliente. Esta asignación de responsabilidad por la operación del cliente no excluye deberes que la ley imponga directamente a Soluciones Digitales IA Studio según su actuación efectiva.</p>
+    </article>
+    <article class="legal-card" id="datos-personales">
+      <span class="badge">Datos personales</span>
+      <h2>Aviso de tratamiento y procedencia de datos</h2>
+      <p>La Ley 1581 de 2012 regula el tratamiento de información que identifica o puede identificar a una persona. Según la función utilizada, el usuario puede trabajar con teléfonos, nombres, mensajes, datos de contacto, información asociada a grupos o resultados de directorios comerciales. El usuario debe determinar para cada conjunto la finalidad, fuente, fundamento jurídico, alcance y plazo de conservación; no debe asumir que todos esos datos son libres por estar visibles en internet o en una cuenta a la que accede.</p>
+      <h3>Responsabilidad según la operación</h3>
+      <p>El cliente responde por los datos que obtiene por su cuenta y por las instrucciones y campañas que configura. Si Soluciones Digitales IA Studio decide finalidades o medios del tratamiento, o trata información por cuenta del cliente, podrá asumir obligaciones propias como responsable o encargado, según los hechos y acuerdos aplicables. Ningún aviso privado elimina derechos de los titulares ni obligaciones legales inderogables.</p>
+      <h3>Finalidades, conservación y seguridad</h3>
+      <p>Los datos que las personas entreguen directamente a través del canal comercial podrán utilizarse para responder consultas, preparar una oferta y brindar soporte solicitado. El tiempo de conservación, almacenamiento, accesos, subencargados y eventuales transferencias de datos asociados al uso del software deben informarse de acuerdo con la configuración real del servicio y limitarse a lo necesario para la finalidad aplicable. El usuario debe aplicar controles de acceso, proteger exportaciones y eliminar o anonimizar los datos cuando ya no sean necesarios, sujeto a deberes legales de conservación.</p>
+      <h3>Derechos y consultas</h3>
+      <p>Los titulares pueden solicitar acceso, actualización o rectificación y, cuando proceda, supresión o revocatoria. Para consultas relacionadas con información que Soluciones Digitales IA Studio trate directamente, escribe a <a href="https://wa.me/573115893220?text=Solicitud%20de%20privacidad%20o%20habeas%20data" target="_blank" rel="noopener noreferrer">WhatsApp +57 311 589 3220</a> con el asunto “Privacidad / Habeas data”. Las solicitudes sobre listas y campañas del cliente deben dirigirse también a quien decidió su recolección y uso.</p>
+    </article>
+    <article class="legal-card legal-completion">
+      <span class="badge">Información institucional pendiente</span>
+      <h2>Datos necesarios para la política definitiva</h2>
+      <p>Para que este aviso sea una política integral publicable, Soluciones Digitales IA Studio debe confirmar e incorporar: razón social y NIT del responsable, domicilio y correo oficial de privacidad; finalidades precisas; qué datos recibe el proveedor y cuáles permanecen en el equipo del cliente; ubicación, plazo de conservación, medidas de seguridad, proveedores con acceso y transferencias internacionales, si existen; y el procedimiento y tiempos de atención de consultas y reclamos.</p>
+      <p>Hasta verificar esos datos, el texto anterior funciona como aviso complementario de uso responsable y no debe presentarse como una descripción completa de la arquitectura o las prácticas de tratamiento.</p>
+    </article>
+    <p class="legal-source">Referencias: <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981" target="_blank" rel="noopener noreferrer">Ley 1581 de 2012</a>, <a href="https://sedeelectronica.sic.gov.co/publicaciones/boletin-juridico/concepto/politicas-de-tratamiento-de-datos-personales" target="_blank" rel="noopener noreferrer">orientación de la SIC sobre políticas y avisos de privacidad</a> y <a href="https://business.whatsapp.com/policy/preview?lang=es_LA" target="_blank" rel="noopener noreferrer">Política de mensajes de WhatsApp Business</a>. Este resumen no reemplaza asesoría jurídica ni los documentos y procedimientos que deban adoptarse.</p>
+  </div>
+    </div>
+  </div>
+</dialog>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="ctr">
+    <div class="fi2">
+      <span class="fc">SOLUCIONES WA &copy; 2026. Todos los derechos reservados.</span>
+      <div class="fls">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#modulos">Parrilla</a>
+        <a href="#seguridad">Seguridad</a>
+        <a href="#precios">Planes</a>
+        <a href="#faq">Preguntas</a>
+        <a href="#aviso-legal" aria-haspopup="dialog">Aviso legal y datos</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menú adaptable para pantallas estrechas y vista previa lateral
+  const navToggle = document.querySelector('.nav-toggle');
+  const siteNav = document.getElementById('site-nav');
+  if (navToggle && siteNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    });
+    siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      siteNav.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+    }));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        siteNav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+      }
+    });
+  }
+
+  // Inicialización de Iconos Lucide
+  lucide.createIcons();
+
+  // La posición horizontal del cursor recorre el movimiento del robot de lado a lado.
+  const heroFrame = document.getElementById('heroFrame');
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroFrame && heroVideo) {
+    let targetTime = 0;
+    let isSeeking = false;
+
+    const scrubVideo = clientX => {
+      const duration = heroVideo.duration;
+      if (!duration || !Number.isFinite(duration) || duration <= 0) return;
+      const rect = heroFrame.getBoundingClientRect();
+      if (!rect.width) return;
+      const position = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      targetTime = position * Math.max(0, duration - 0.001);
+      if (!isSeeking) {
+        isSeeking = true;
+        heroVideo.currentTime = targetTime;
+      }
+    };
+
+    heroFrame.addEventListener('pointermove', event => scrubVideo(event.clientX));
+    const initializeVideo = () => {
+      heroVideo.pause();
+      targetTime = 0.001;
+      heroVideo.currentTime = targetTime;
+    };
+    heroVideo.addEventListener('loadedmetadata', initializeVideo);
+    if (heroVideo.readyState >= 1) initializeVideo();
+    heroVideo.addEventListener('seeked', () => {
+      if (Math.abs(heroVideo.currentTime - targetTime) > 0.02) {
+        heroVideo.currentTime = targetTime;
+      } else {
+        isSeeking = false;
+      }
+    });
+  }
+  // Scroll Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('vis');
+        const counters = entry.target.querySelectorAll('[data-target]');
+        counters.forEach(c => animateCounter(c));
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ Accordion
+  function tfaq(btn) {
+    const item = btn.closest('.fi');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.fi').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Contadores Numéricos
+  function animateCounter(el) {
+    if (el.dataset.animated) return;
+    el.dataset.animated = "true";
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    let count = 0;
+    const duration = 1400;
+    const stepTime = Math.max(Math.floor(duration / target), 20);
+    const timer = setInterval(() => {
+      count += Math.ceil(target / (duration / stepTime));
+      if (count >= target) {
+        count = target;
+        clearInterval(timer);
+      }
+      el.textContent = count + suffix;
+    }, stepTime);
+  }
+
+
+
+
+  // Resaltado de Navegación
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#' + current ? '#00c2cb' : '';
+    });
+  }, { passive: true });
+  // Aviso legal en popup desde el menú del footer.
+  const legalDialog = document.getElementById('aviso-legal');
+  const legalTrigger = document.querySelector('a[href="#aviso-legal"]');
+  const legalClose = legalDialog?.querySelector('[data-close-legal]');
+  if (legalDialog && legalTrigger) {
+    legalTrigger.addEventListener('click', event => {
+      event.preventDefault();
+      legalDialog.showModal();
+      if (window.lucide) lucide.createIcons();
+    });
+    legalClose?.addEventListener('click', () => legalDialog.close());
+    legalDialog.addEventListener('click', event => {
+      if (event.target === legalDialog) legalDialog.close();
+    });
+    legalDialog.addEventListener('close', () => legalTrigger.focus());
+  }
+
+
+  // Botón flotante para regresar al inicio.
+  const backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    const updateBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 480);
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+  }
+
+
+  // Una nota sutil y una instrucción visible al descubrir el movimiento del robot.
+  const robotCue = document.getElementById('robotInteractionCue');
+  if (heroVideo && robotCue) {
+    let cueSoundPlayed = false;
+    const playRobotCueSound = async () => {
+      if (cueSoundPlayed) return;
+      try {
+        const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextCtor) return;
+        const audioContext = new AudioContextCtor();
+        if (audioContext.state === 'suspended') await audioContext.resume();
+        if (audioContext.state !== 'running') {
+          await audioContext.close();
+          return;
+        }
+        const now = audioContext.currentTime;
+        [520, 760, 1040, 820].forEach((frequency, index) => {
+          const oscillator = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          const toneStart = now + index * 0.075;
+          const toneEnd = toneStart + 0.12;
+          oscillator.type = 'triangle';
+          oscillator.frequency.setValueAtTime(frequency, toneStart);
+          oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.035, toneEnd);
+          gain.gain.setValueAtTime(0.0001, toneStart);
+          gain.gain.exponentialRampToValueAtTime(0.026, toneStart + 0.012);
+          gain.gain.exponentialRampToValueAtTime(0.0001, toneEnd);
+          oscillator.connect(gain);
+          gain.connect(audioContext.destination);
+          oscillator.start(toneStart);
+          oscillator.stop(toneEnd + 0.005);
+        });
+        cueSoundPlayed = true;
+        window.setTimeout(() => audioContext.close().catch(() => {}), 650);
+      } catch (error) {
+        // Si el navegador bloquea el sonido al pasar, se volverá a intentar al hacer clic.
+      }
+    };
+    heroVideo.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'touch') return;
+      robotCue.classList.add('is-active');
+      playRobotCueSound();
+    });
+    heroVideo.addEventListener('pointerleave', () => robotCue.classList.remove('is-active'));
+    heroVideo.addEventListener('pointerdown', event => {
+      robotCue.classList.add('is-active');
+      if (event.pointerType !== 'touch') playRobotCueSound();
+    });
+  }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
