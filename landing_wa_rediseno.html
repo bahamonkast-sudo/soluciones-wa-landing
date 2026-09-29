@@ -135,6 +135,13 @@
     }
     .hero-sub strong{color:var(--text-main);font-weight:600}
     .hero-ctas{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:15px;margin-bottom:3rem}
+    .download-cta{background:#1769ff!important;color:#fff!important;border-color:#1769ff!important;box-shadow:0 8px 28px rgba(23,105,255,.24)}
+    .download-cta:hover{background:#3185ff!important;border-color:#3185ff!important;box-shadow:0 12px 32px rgba(23,105,255,.36)}
+    .parallax-band{position:relative;min-height:clamp(280px,38vw,500px);display:grid;place-items:center;overflow:hidden;background-image:linear-gradient(90deg,rgba(3,11,23,.48),rgba(4,17,39,.24),rgba(3,11,23,.55)),url('soluciones-wa-parallax.jpg');background-position:center 48%;background-size:cover;background-attachment:fixed;border-top:1px solid rgba(53,124,255,.35);border-bottom:1px solid rgba(53,124,255,.35)}
+    .parallax-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,13,28,.12),rgba(4,13,28,.28));pointer-events:none}
+    .parallax-band .parallax-caption{position:absolute;z-index:1;bottom:18px;left:20px;padding:7px 11px;border:1px solid #ffffff30;border-radius:999px;background:#07111f9c;color:#e5f0ff;font-size:.72rem;letter-spacing:.04em;backdrop-filter:blur(8px)}
+    .download-inline{display:flex;justify-content:center;margin:1.7rem auto 2.2rem}
+    .download-inline .download-cta{padding:13px 24px}
 
     /* BARRA DE BENEFICIOS DESTACADOS */
     .benefit-strip{
@@ -772,9 +779,9 @@
             <button class="nav-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="site-nav">
         <i data-lucide="menu" style="width:20px;height:20px"></i>
       </button>
-      <a href="#precios" class="btn-p" style="padding:10px 24px;font-size:.74rem">
-        <i data-lucide="sparkles" style="width:14px;height:14px"></i>
-        Conocer Planes
+      <a href="descarga.html" class="btn-p download-cta" style="padding:10px 24px;font-size:.74rem">
+        <i data-lucide="download" style="width:14px;height:14px"></i>
+        Descargar gratis
       </a>
     </div>
   </div>
@@ -823,9 +830,9 @@
       </div>
 
       <div class="hero-ctas reveal vis" style="transition-delay:.24s">
-        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p">
-          <i data-lucide="message-circle" style="width:16px;height:16px"></i>
-          Solicitar Demostración
+        <a href="descarga.html" class="btn-p download-cta">
+          <i data-lucide="download" style="width:16px;height:16px"></i>
+          Descargar gratis
         </a>
         <a href="#modulos" class="btn-s">
           Ver Parrilla de Servicios
@@ -1172,6 +1179,10 @@
 
 <div class="divl"></div>
 
+<section class="parallax-band" role="img" aria-label="Ilustración de una estrategia de WhatsApp, CRM y automatización digital con un robot tecnológico">
+  <span class="parallax-caption">Estrategia integrada · Visibilidad · Contacto directo</span>
+</section>
+<div class="download-inline ctr"><a href="descarga.html" class="btn-p download-cta"><i data-lucide="download" style="width:18px;height:18px"></i> Ver guía y descargar</a></div>
 <!-- BENEFICIARIOS Y PERSONALIZACIÓN -->
 <section id="personalizacion" class="personalizacion">
   <div class="ctr personal-grid">
@@ -1195,9 +1206,9 @@
           <span><i data-lucide="calendar-days"></i> Academias, eventos y servicios con citas</span>
         </div>
       </div>
-      <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p personal-cta">
-        <i data-lucide="message-circle" style="width:18px;height:18px"></i>
-        Consultar por WhatsApp
+      <a href="descarga.html" class="btn-p personal-cta download-cta">
+        <i data-lucide="download" style="width:18px;height:18px"></i>
+        Evaluar y descargar gratis
       </a>
     </div>
     <div class="personal-visual reveal" role="img" aria-label="Ilustración de una hoja con nombre y número de factura que se convierten en un mensaje personalizado">
@@ -1401,6 +1412,7 @@
       <p>Suscripción mensual flexible sin cláusulas de permanencia. Elige el plan que se adapte a tu volumen de operación.</p>
     </div>
 
+    <div class="download-inline"><a href="descarga.html" class="btn-p download-cta"><i data-lucide="download" style="width:18px;height:18px"></i> Descargar la aplicación gratis</a></div>
     <!-- TARJETAS -->
     <div class="pricing-cards-grid reveal">
       <!-- PLAN PRO -->
@@ -1662,6 +1674,10 @@
         Comunícate con nuestro equipo para asesorarte sobre el plan ideal para tu negocio y resolver todas tus inquietudes.
       </p>
       <div class="reveal" style="transition-delay:.3s">
+        <a href="descarga.html" class="btn-p download-cta" style="font-size:.92rem;padding:17px 44px;margin-right:10px">
+          <i data-lucide="download" style="width:22px;height:22px"></i>
+          Descargar gratis
+        </a>
         <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p" style="font-size:.92rem;padding:17px 44px">
           <i data-lucide="message-circle" style="width:22px;height:22px"></i>
           Conversar con un Asesor por WhatsApp
