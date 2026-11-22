@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -17,13 +17,12 @@
       --brand:#00c2cb;--brand-light:#4fe0e7;--brand-dark:#080d1a;
       --bg-alt:#0d1322;--card:#11192e;--card-relief:#15203a;
       --border:rgba(255,255,255,0.08);--border-glow:rgba(0,194,203,0.35);
-      --plus-color:#00e5a3;--plus-glow:rgba(0,229,163,0.3);
       --white:#ffffff;--text-main:#e2e8f0;--muted:#94a3b8;
     }
     html{scroll-behavior:smooth}
     body{
       font-family:'Inter','Plus Jakarta Sans',sans-serif;
-      background:var(--brand-dark);color:var(--muted);
+      background:#ffffff;color:var(--muted);
       -webkit-font-smoothing:antialiased;overflow-x:hidden;
       position:relative;
     }
@@ -37,17 +36,6 @@
     .ctr-sm{max-width:880px;margin:0 auto;padding:0 1.5rem}
 
     /* ELEMENTOS DE FONDO */
-    .grid-pattern{
-      position:fixed;inset:0;pointer-events:none;z-index:0;
-      background-image:
-        radial-gradient(circle 900px at 20% 15%, rgba(0,194,203,0.07), transparent),
-        radial-gradient(circle 800px at 80% 55%, rgba(0,229,163,0.05), transparent);
-    }
-    .dots-overlay{
-      position:fixed;inset:0;pointer-events:none;z-index:0;
-      background-image:radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size:36px 36px;
-    }
     .divl{height:1px;background:linear-gradient(90deg,transparent,rgba(0,194,203,0.22),transparent);position:relative;z-index:3}
 
     /* BADGES */
@@ -302,14 +290,14 @@
       display:flex;align-items:center;justify-content:center;color:var(--brand);
     }
     .mic.mic-plus{
-      background:rgba(0,229,163,0.08);border-color:rgba(0,229,163,0.25);color:var(--plus-color);
+      background:rgba(0,229,163,0.08);border-color:rgba(0,229,163,0.25);color:#34d399;
     }
     .mt{
       font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
       padding:4px 11px;border-radius:99px;
     }
     .tpro{color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.2)}
-    .tplus{color:var(--plus-color);background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.28)}
+    .tplus{color:#34d399;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.28)}
     .mc h3{font-size:1.06rem;margin-bottom:.6rem;color:var(--white)}
     .mc p{font-size:.85rem;line-height:1.68;color:var(--muted);flex-grow:1}
 
@@ -324,7 +312,7 @@
       font-weight:800;letter-spacing:.08em;font-size:.64rem;text-transform:uppercase;
       color:var(--brand);flex-shrink:0;width:68px;
     }
-    .io-lbl.plus{color:var(--plus-color)}
+    .io-lbl.plus{color:#34d399}
     .io-val{color:var(--text-main);font-weight:500;line-height:1.4}
 
     /* ENLACE DE ACCIÓN EN TARJETA */
@@ -335,7 +323,7 @@
       transition:gap .2s, color .2s;
     }
     .mod-action:hover{gap:10px;color:var(--brand-light)}
-    .mod-action.plus{color:var(--plus-color)}
+    .mod-action.plus{color:#34d399}
     .mod-action.plus:hover{color:#5effcf}
 
     /* CÓMO FUNCIONA */
@@ -371,7 +359,7 @@
       font-weight:800;color:var(--brand);line-height:1;margin-bottom:10px;
       letter-spacing:-.02em;
     }
-    .mv.teal{color:var(--plus-color)}
+    .mv.teal{color:#34d399}
     .ml{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
     /* TESTIMONIALES */
@@ -402,14 +390,26 @@
       display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:3.5rem;
     }
     @media(min-width:860px){.pricing-cards-grid{grid-template-columns:1fr 1fr}}
+    .plan-comparative{
+      display:flex;gap:1rem;flex-wrap:wrap;align-items:stretch;
+    }
     .plan-box{
       border-radius:24px;background:var(--card);border:1px solid var(--border);
-      padding:2.5rem;position:relative;overflow:hidden;
+      padding:2rem;flex:1;min-width:280px;position:relative;overflow:hidden;
       display:flex;flex-direction:column;justify-content:space-between;
       transition:all .3s ease;
     }
     .plan-box:hover{transform:translateY(-5px)}
-    .plan-box.plus-featured{
+    .plan-box.featured{
+      position:relative;
+      z-index:1;
+    }
+    .plan-box::before{
+      content:'';position:absolute;top:0;left:0;width:100%;height:4px;
+      background:linear-gradient(90deg,var(--teal),var(--brand-light));
+      opacity:.5;
+    }
+    .plan-box.featured{
       border-color:rgba(0,229,163,0.35);
       background:linear-gradient(180deg, #121f3a, #0e172a);
       box-shadow:0 0 40px rgba(0,229,163,0.08), 0 20px 50px rgba(0,0,0,0.4);
@@ -418,7 +418,7 @@
       position:absolute;top:20px;right:20px;
       font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
       padding:5px 14px;border-radius:99px;
-      background:rgba(0,229,163,0.15);color:var(--plus-color);
+      background:rgba(0,229,163,0.15);color:#34d399;
       border:1px solid rgba(0,229,163,0.35);box-shadow:0 0 15px rgba(0,229,163,0.2);
     }
     .plan-header h3{font-size:1.45rem;margin-bottom:.5rem}
@@ -440,14 +440,14 @@
     thead tr{background:rgba(0,0,0,0.35)}
     thead th{padding:1.3rem 1.4rem;font-weight:700;color:var(--white);font-size:.85rem}
     .cp{text-align:center;color:#94a3b8}
-    .cpl{text-align:center;background:rgba(0,229,163,0.06);color:var(--plus-color);font-weight:800}
+    .cpl{text-align:center;background:rgba(0,229,163,0.06);color:#34d399;font-weight:800}
     tbody tr{border-top:1px solid var(--border);transition:background .2s}
     tbody tr:hover{background:rgba(255,255,255,0.02)}
     tbody td{padding:1.05rem 1.4rem}
     .feat-name{color:var(--text-main);font-weight:500}
     .feat-sub{font-size:.74rem;color:var(--muted);display:block;margin-top:2px}
     .tdp{text-align:center;color:#64748b}
-    .tdpl{text-align:center;background:rgba(0,229,163,0.04);color:var(--plus-color);font-weight:700}
+    .tdpl{text-align:center;background:rgba(0,229,163,0.04);color:#34d399;font-weight:700}
     tfoot tr{background:rgba(0,0,0,0.4);border-top:1px solid rgba(0,194,203,0.15)}
     tfoot td{padding:1.4rem}
     .fnote{font-size:.76rem;color:var(--muted)}
@@ -749,6 +749,40 @@
     .floating-whatsapp:hover,.floating-whatsapp:focus-visible{transform:translateY(-3px);background:#07966a;box-shadow:0 12px 34px rgba(0,0,0,.42),0 0 28px rgba(0,229,163,.25);outline:2px solid #93ffd2;outline-offset:3px}
     @media(max-width:760px){.social-inner{grid-template-columns:1fr;gap:1.35rem}.facebook-like-card{max-width:560px;width:100%;margin:0 auto}}
     @media(max-width:520px){.floating-whatsapp{left:.8rem;bottom:.9rem;padding:.77rem .95rem;font-size:.78rem}#back-to-top{right:.8rem;bottom:.9rem;width:44px;height:44px}}
+    /* Tema claro solicitado */
+    :root{
+      --brand-dark:#ffffff;--bg-alt:#f7fafc;--card:#ffffff;--card-relief:#f1f5f9;
+      --border:rgba(15,23,42,.12);--white:#172033;--text-main:#243247;--muted:#526174;
+    }
+    body{background:#fff;color:var(--muted)}
+    header{background:rgba(255,255,255,.94);border-bottom-color:var(--border)}
+    nav a{color:#475569}
+    .btn-s{background:#fff;color:#172033;border-color:var(--border)}
+    .grid-pattern{background-image:radial-gradient(ellipse 780px 520px at 50% 0%,rgba(53,213,208,.08),transparent 72%),radial-gradient(ellipse 600px 480px at 92% 48%,rgba(0,194,203,.035),transparent 70%)}
+    .beneficios,.modulos{background:#f7fafc}
+    .float-card,.plan-switch-banner,.gc,.fi,.legal-section{background:#fff}
+    .b-card,.mc,.ptw,.ctaf-c{background:#fff}
+    .mc.card-plus{background:#f4fbf9}
+    #gestion-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:760px){#gestion-grid{grid-template-columns:1fr}}
+    .plan-box.featured,.plan-box.featured h3,.plan-box.featured p,
+    .plan-box.featured .plan-rate span,.plan-box.featured .plan-feats li,
+    .plan-box.featured .plan-badge{color:#fff!important}
+    .plan-box.featured .plan-feats li.feat-off{color:#fff!important}
+    .plan-box.featured .plan-tag-rec{color:#fff}
+    .plan-box.featured .btn-p{color:#06202a!important}
+    .io-box{background:#f8fafc}
+    .ptw{box-shadow:0 14px 36px rgba(15,23,42,.08)}
+    thead tr,tfoot tr{background:#f1f5f9}
+    tbody tr:hover{background:#f8fafc}
+    .parallax-band{background-image:linear-gradient(90deg,rgba(3,11,23,.22),rgba(4,17,39,.08),rgba(3,11,23,.22)),url('soluciones-wa-parallax.jpg');background-position:center 48%;background-size:cover;background-attachment:fixed;background-color:#f7fafc;border-color:var(--border)}
+    .parallax-band::after{display:none}
+    .parallax-band .parallax-caption{background:#fff;color:#334155;border-color:var(--border)}
+    footer{background:#f1f5f9;border-top-color:var(--border)}
+    .nav-inner nav{background:#fff}
+    .legal-card{background:#fff}
+    .legal-modal{background:#fff;color:#243247}
+    .legal-modal h1,.legal-modal h2,.legal-modal h3{color:#172033}
   </style>
 </head>
 <body>
@@ -779,9 +813,9 @@
             <button class="nav-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="site-nav">
         <i data-lucide="menu" style="width:20px;height:20px"></i>
       </button>
-      <a href="descarga.html" class="btn-p download-cta" style="padding:10px 24px;font-size:.74rem">
-        <i data-lucide="download" style="width:14px;height:14px"></i>
-        Descargar gratis
+      <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" class="btn-p download-cta" style="padding:10px 24px;font-size:.74rem">
+        <i data-lucide="message-circle" style="width:14px;height:14px"></i>
+        Solicitar por WhatsApp
       </a>
     </div>
   </div>
@@ -816,8 +850,8 @@
           <div id="robotInteractionCue" class="robot-interaction-cue" aria-live="polite" aria-atomic="true">
             <i data-lucide="mouse-pointer-2" class="cue-pointer" style="width:18px;height:18px"></i>
             <span class="cue-idle">Pasa el cursor sobre el robot</span>
-            <span class="cue-active">¡Ahora muévelo a izquierda y derecha!</span>
-            <span class="cue-touch">Desliza el cursor para interactuar con el robot</span>
+            <span class="cue-active">¡Ahora muévelo a la izquierda y a la derecha!</span>
+            <span class="cue-touch">Desliza el dedo para interactuar con el robot</span>
             <i data-lucide="arrow-left-right" class="cue-arrows" style="width:17px;height:17px"></i>
           </div>
         </div>
@@ -830,9 +864,9 @@
       </div>
 
       <div class="hero-ctas reveal vis" style="transition-delay:.24s">
-        <a href="descarga.html" class="btn-p download-cta">
-          <i data-lucide="download" style="width:16px;height:16px"></i>
-          Descargar gratis
+        <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" class="btn-p download-cta">
+          <i data-lucide="message-circle" style="width:16px;height:16px"></i>
+          Solicitar por WhatsApp
         </a>
         <a href="#modulos" class="btn-s">
           Ver Parrilla de Servicios
@@ -930,7 +964,7 @@
     <div class="plan-switch-banner reveal">
       <div class="ps-info">
         <i data-lucide="layers" style="width:20px;height:20px;color:var(--brand)"></i>
-        <span><strong>Plan PRO:</strong> Envíos, extracción de grupos y miembros, y calentador para 1 línea &middot; <strong>Plan PLUS:</strong> Todo PRO + multicuenta, Google Maps, filtros de grupos y líneas, agregador y calentador en malla completa</span>
+        <span><strong>Plan:</strong> Envíos, extracción de grupos y miembros, y calentador para 1 línea &middot; <strong>Plan:</strong> Todo PRO + multicuenta, Google Maps, filtros de grupos y líneas, agregador y calentador en malla completa</span>
       </div>
       <a href="#precios" class="btn-s" style="padding:8px 18px;font-size:.76rem">Ver Tabla Comparativa</a>
     </div>
@@ -949,9 +983,9 @@
         <div>
           <div class="mh">
             <div class="mic"><i data-lucide="users-2" style="width:20px;height:20px"></i></div>
-            <span class="mt tpro">Plan PRO</span>
+            <span class="mt tpro">Plan</span>
           </div>
-          <h3>Envío Masivo de mensajes a Grupos de Whatsapp</h3>
+          <h3>Envío masivo de mensajes a Grupos de WhatsApp</h3>
           <p>Difusión programada a comunidades y grupos vinculados con motor spintax rotativo, soporte multi-adjuntos y pausas estocásticas.</p>
           
           <div class="io-box">
@@ -972,7 +1006,7 @@
         <div>
           <div class="mh">
             <div class="mic mic-plus"><i data-lucide="repeat" style="width:20px;height:20px"></i></div>
-            <span class="mt tplus">Plan PLUS ⭐</span>
+            <span class="mt tplus">Plan ⭐</span>
           </div>
           <h3>Despacho Multicuenta Round-Robin</h3>
           <p>Distribución balanceada de prospectos entre 2 o más líneas activas mediante micro-lotes de 5, presencia humana y enfriamientos.</p>
@@ -995,9 +1029,9 @@
         <div>
           <div class="mh">
             <div class="mic"><i data-lucide="user-check" style="width:20px;height:20px"></i></div>
-            <span class="mt tpro">Plan PRO</span>
+            <span class="mt tpro">Plan</span>
           </div>
-          <h3>Envío masivo de mensajes a Contactos</h3>
+          <h3>Envío masivo de mensajes a contactos</h3>
           <p>Emisión directa y personalizada por columnas desde Excel con variables dinámicas, pausas humanas y rotación multi-cuenta.</p>
           
           <div class="io-box">
@@ -1017,9 +1051,9 @@
 
     <!-- CATEGORÍA 2: EXTRACCIÓN, MINERÍA Y VALIDACIÓN -->
     <div class="mod-cat-title reveal" style="margin-top:3.6rem">
-      <i data-lucide="database" style="width:22px;height:22px;color:var(--plus-color)"></i>
+      <i data-lucide="database" style="width:22px;height:22px;color:#34d399"></i>
       <span>Extracción, Minería y Validación</span>
-      <span class="mod-cat-badge" style="background:rgba(0,229,163,0.1);color:var(--plus-color);border-color:rgba(0,229,163,0.25)">4 Módulos</span>
+      <span class="mod-cat-badge" style="background:rgba(0,229,163,0.1);color:#34d399;border-color:rgba(0,229,163,0.25)">4 Módulos</span>
     </div>
 
     <div class="mg reveal">
@@ -1029,9 +1063,9 @@
         <div>
           <div class="mh">
             <div class="mic mic-plus"><i data-lucide="map-pin" style="width:20px;height:20px"></i></div>
-            <span class="mt tplus">Plan PLUS ⭐</span>
+            <span class="mt tplus">Plan ⭐</span>
           </div>
-          <h3>Extractor Google Maps</h3>
+          <h3>Extractor de Google Maps</h3>
           <p>Minería directa de establecimientos y empresas por cuadrícula geográfica y nicho comercial sin costos de APIs externas.</p>
           
           <div class="io-box">
@@ -1052,7 +1086,7 @@
         <div>
           <div class="mh">
             <div class="mic"><i data-lucide="folder-search" style="width:20px;height:20px"></i></div>
-            <span class="mt tpro">Plan PRO</span>
+            <span class="mt tpro">Plan</span>
           </div>
           <h3>Extractor de Grupos de WhatsApp</h3>
           <p>Ubica todos los grupos de la línea conectada tal como están y los descarga a Excel. Sin filtros ni depuración: extracción pura.</p>
@@ -1075,9 +1109,9 @@
         <div>
           <div class="mh">
             <div class="mic mic-plus"><i data-lucide="filter" style="width:20px;height:20px"></i></div>
-            <span class="mt tplus">Plan PLUS ⭐</span>
+            <span class="mt tplus">Plan ⭐</span>
           </div>
-          <h3>Filtro Grupos y Comunidades</h3>
+          <h3>Filtro de Grupos y Comunidades</h3>
           <p>Censa e identifica todos los grupos donde la línea participa, exportando el inventario de identificadores JID.</p>
           
           <div class="io-box">
@@ -1098,9 +1132,9 @@
         <div>
           <div class="mh">
             <div class="mic"><i data-lucide="user-plus" style="width:20px;height:20px"></i></div>
-            <span class="mt tpro">Plan PRO</span>
+            <span class="mt tpro">Plan</span>
           </div>
-          <h3>Extractor Miembros de grupos de WhatsApp</h3>
+          <h3>Extractor de Miembros de Grupos de WhatsApp</h3>
           <p>Extracción estructurada de participantes de grupos seleccionados con discriminación de administradores y guardado en Excel.</p>
           
           <div class="io-box">
@@ -1125,16 +1159,16 @@
       <span class="mod-cat-badge">3 Módulos</span>
     </div>
 
-    <div class="mg reveal">
+    <div class="mg reveal" id="gestion-grid">
       <!-- MÓDULO 8: CALENTADOR (PRO) -->
       <div class="mc">
         <div>
           <div class="mh">
             <div class="mic"><i data-lucide="activity" style="width:20px;height:20px"></i></div>
-            <span class="mt tpro">Plan PRO</span>
           </div>
-          <h3>Calentador de Números WhatsApp</h3>
+          <h3>Calentador de Números de WhatsApp</h3>
           <p>Simulación de conversaciones entre líneas propias, con diálogos automáticos y tiempos estocásticos para ayudar a madurar la reputación de tus números.</p>
+          <i data-lucide="clock" style="width:16px;height:16px;vertical-align:middle;margin-left:4px"></i><span> Envío programado de mensajes a grupos de WhatsApp</span>
           <div class="io-box">
             <div class="io-row"><span class="io-lbl">ENTRADA:</span><span class="io-val">Malla de Números Conectados</span></div>
             <div class="io-row"><span class="io-lbl">SALIDA:</span><span class="io-val">Telemetría de Maduración en Vivo</span></div>
@@ -1147,7 +1181,7 @@
         <div>
           <div class="mh">
             <div class="mic mic-plus"><i data-lucide="list-checks" style="width:20px;height:20px"></i></div>
-            <span class="mt tplus">Plan PLUS ⭐</span>
+            <span class="mt tplus">Plan ⭐</span>
           </div>
           <h3>Validador / Filtro de Líneas</h3>
           <p>Verificación de cuentas de WhatsApp activas sobre bases de contactos para depurar la lista y reducir rebotes en tus campañas.</p>
@@ -1163,9 +1197,9 @@
         <div>
           <div class="mh">
             <div class="mic mic-plus"><i data-lucide="user-round-plus" style="width:20px;height:20px"></i></div>
-            <span class="mt tplus">Plan PLUS ⭐</span>
+            <span class="mt tplus">Plan ⭐</span>
           </div>
-          <h3>Agregar Contactos a Mis Grupos</h3>
+          <h3>Agregador a Grupos de WhatsApp</h3>
           <p>Inclusión escalonada de contactos depurados en tus grupos, con pausas inteligentes para reducir el riesgo de restricciones.</p>
           <div class="io-box">
             <div class="io-row"><span class="io-lbl plus">ENTRADA:</span><span class="io-val">Grupo Destino + Lista Válida</span></div>
@@ -1182,7 +1216,7 @@
 <section class="parallax-band" role="img" aria-label="Ilustración de una estrategia de WhatsApp, CRM y automatización digital con un robot tecnológico">
   <span class="parallax-caption">Estrategia integrada · Visibilidad · Contacto directo</span>
 </section>
-<div class="download-inline ctr"><a href="descarga.html" class="btn-p download-cta"><i data-lucide="download" style="width:18px;height:18px"></i> Ver guía y descargar</a></div>
+<div class="download-inline ctr"><a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" class="btn-p download-cta"><i data-lucide="message-circle" style="width:18px;height:18px"></i> Solicitar por WhatsApp</a></div>
 <!-- BENEFICIARIOS Y PERSONALIZACIÓN -->
 <section id="personalizacion" class="personalizacion">
   <div class="ctr personal-grid">
@@ -1206,9 +1240,9 @@
           <span><i data-lucide="calendar-days"></i> Academias, eventos y servicios con citas</span>
         </div>
       </div>
-      <a href="descarga.html" class="btn-p personal-cta download-cta">
-        <i data-lucide="download" style="width:18px;height:18px"></i>
-        Evaluar y descargar gratis
+      <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" class="btn-p personal-cta download-cta">
+        <i data-lucide="message-circle" style="width:18px;height:18px"></i>
+        Solicitar información
       </a>
     </div>
     <div class="personal-visual reveal" role="img" aria-label="Ilustración de una hoja con nombre y número de factura que se convierten en un mensaje personalizado">
@@ -1412,146 +1446,89 @@
       <p>Suscripción mensual flexible sin cláusulas de permanencia. Elige el plan que se adapte a tu volumen de operación.</p>
     </div>
 
-    <div class="download-inline"><a href="descarga.html" class="btn-p download-cta"><i data-lucide="download" style="width:18px;height:18px"></i> Descargar la aplicación gratis</a></div>
-    <!-- TARJETAS -->
-    <div class="pricing-cards-grid reveal">
-      <!-- PLAN PRO -->
-      <div class="plan-box">
-        <div>
-          <div class="plan-header">
-            <h3>PLAN PRO</h3>
-            <p>Pensado para profesionales y pequeños negocios que operan con 1 línea de WhatsApp y desean automatizar sus mensajes y contactos.</p>
-          </div>
-          <div class="plan-rate">
-            <span class="amount">Plan Mensual</span>
-            <span class="period">/ suscripción flexible</span>
-          </div>
-          <ul class="plan-feats">
-            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Envío Masivo de mensajes a Grupos de WhatsApp</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Envío masivo de mensajes a Contactos</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Extractor de Grupos de WhatsApp</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Extractor Miembros de grupos de WhatsApp</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Calentador de Números WhatsApp</span></li>
-          </ul>
+    <div class="download-inline"><a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" class="btn-p download-cta"><i data-lucide="message-circle" style="width:18px;height:18px"></i> Solicitar información por WhatsApp</a></div>
+
+    <!-- TABLA DE PRECIOS -->
+    <section id="precios" class="precios">
+      <div class="ctr">
+        <div class="sh reveal">
+          <span class="badge">Opciones Disponibles</span>
+          <h2>Elige el Plan Adecuado para tu Negocio</h2>
+          <p>Suscripción mensual flexible sin cláusulas de permanencia. Elige el plan que se adapte a tu volumen de operación.</p>
         </div>
-        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PRO" target="_blank" rel="noopener noreferrer" class="btn-s" style="width:100%;justify-content:center;font-weight:700">
-          Adquirir PRO
-        </a>
-      </div>
 
-      <!-- PLAN PLUS -->
-      <div class="plan-box plus-featured">
-        <span class="plan-tag-rec">⭐ Más Completo</span>
-        <div>
-          <div class="plan-header">
-            <h3 style="color:var(--plus-color)">PLAN PLUS</h3>
-            <p>La opción recomendada para empresas y equipos de ventas que requieren alto volumen de prospección, rotación multilínea y minería avanzada.</p>
+        <div class="plan-comparative">
+          <div class="plan-box">
+            <div>
+              <div class="plan-header">
+                <h3>1 Mes</h3>
+              </div>
+              <div class="plan-rate">
+                <span class="amount">$ 65.000</span>
+                <span class="period">/ mes</span>
+              </div>
+            </div>
+            <ul class="plan-feats">
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Envío masivo de mensajes a Grupos de WhatsApp</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Protección para tus Líneas</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Cercanía y Personalización Total</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Tasa de respuesta mucho más alta</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Ahorro Masivo de Tiempo Diario</span></li>
+            </ul>
+            <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA.%20Interesado%20en%20plan%201%20mes." target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;padding:10px 24px;font-size:.85rem;font-weight:700;background:var(--teal);color:#06202a">
+              Solicitar por WhatsApp
+            </a>
           </div>
-          <div class="plan-rate">
-            <span class="amount" style="color:var(--plus-color)">Plan Mensual</span>
-            <span class="period">/ suscripción flexible</span>
+
+          <div class="plan-box featured">
+            <div>
+              <div class="plan-header">
+                <h3>2 Meses</h3>
+              </div>
+              <div class="plan-rate">
+                <span class="amount">$ 120.000</span>
+                <span class="period">/ 2 meses</span>
+              </div>
+            </div>
+            <ul class="plan-feats">
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Envío masivo de mensajes a Grupos de WhatsApp</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Protección para tus Líneas</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Cercanía y Personalización Total</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Tasa de respuesta mucho más alta</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Ahorro Masivo de Tiempo Diario</span></li>
+            </ul>
+            <p class="plan-badge">+ 1 Mes Adicional Gratis</p>
+            <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA.%20Interesado%20en%20plan%202%20meses." target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;padding:10px 24px;font-size:.85rem;font-weight:700;background:var(--teal);color:#06202a">
+              Solicitar por WhatsApp
+            </a>
           </div>
-          <ul class="plan-feats">
-            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Incluye las cinco funciones del Plan PRO</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Despacho Multicuenta Round-Robin</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Extractor Google Maps</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Filtro Grupos y Comunidades</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Validador / Filtro de Líneas</span></li>
-            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--plus-color)"></i><span>Agregar Contactos a Mis Grupos</span></li>
-          </ul>
+
+          <div class="plan-box">
+            <div>
+              <div class="plan-header">
+                <h3>3 Meses</h3>
+              </div>
+              <div class="plan-rate">
+                <span class="amount">$ 175.000</span>
+                <span class="period">/ 3 meses</span>
+              </div>
+            </div>
+            <ul class="plan-feats">
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Envío masivo de mensajes a Grupos de WhatsApp</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Protección para tus Líneas</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Cercanía y Personalización Total</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span> Tasa de respuesta mucho más alta</span></li>
+              <li><i data-lucide="check" style="width:16px;height:16px;color:#34d399"></i><span>Ahorro Masivo de Tiempo Diario</span></li>
+            </ul>
+            <p class="plan-badge">+ 2 Meses Adicionales Gratis</p>
+            <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA.%20Interesado%20en%20plan%203%20meses." target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;padding:10px 24px;font-size:.85rem;font-weight:700;background:var(--teal);color:#06202a">
+              Solicitar por WhatsApp
+            </a>
+          </div>
         </div>
-        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PLUS" target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;background:var(--plus-color);color:#04141d;font-weight:700">
-          Adquirir PLUS
-        </a>
       </div>
-    </div>
-
-    <!-- TABLA COMPARATIVA -->
-    <div class="ptw reveal">
-      <div style="overflow-x:auto">
-        <table>
-          <thead>
-            <tr>
-              <th style="text-align:left;width:48%">MÓDULO O BENEFICIO COMERCIAL</th>
-              <th class="cp" style="width:26%">PLAN PRO</th>
-              <th class="cpl" style="width:26%">PLAN PLUS (RECOMENDADO)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">Envío Masivo de mensajes a Grupos de WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
-              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Envío masivo de mensajes a Contactos<span class="tier-pill tier-pro">PRO</span></td>
-              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Extractor de Grupos de WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
-              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Extractor Miembros de grupos de WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
-              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Calentador de Números WhatsApp<span class="tier-pill tier-pro">PRO</span></td>
-              <td class="tdp"><i data-lucide="check" style="width:16px;height:16px;color:#34d399;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Despacho Multicuenta Round-Robin<span class="tier-pill tier-plus">PLUS</span></td>
-              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Extractor Google Maps<span class="tier-pill tier-plus">PLUS</span></td>
-              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Filtro Grupos y Comunidades<span class="tier-pill tier-plus">PLUS</span></td>
-              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Validador / Filtro de Líneas<span class="tier-pill tier-plus">PLUS</span></td>
-              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Agregar Contactos a Mis Grupos<span class="tier-pill tier-plus">PLUS</span></td>
-              <td class="tdp"><i data-lucide="minus" style="width:16px;height:16px;color:#475569;display:inline"></i></td>
-              <td class="tdpl"><i data-lucide="check" style="width:16px;height:16px;display:inline"></i></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <span class="fnote">Todas las licencias incluyen soporte técnico de instalación y actualizaciones de compatibilidad.</span>
-              </td>
-              <td style="text-align:center;padding:1.4rem">
-                <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PRO" target="_blank" rel="noopener noreferrer" class="btn-s" style="width:100%;justify-content:center;padding:10px 16px;font-size:.85rem;font-weight:700">Adquirir PRO</a>
-              </td>
-              <td style="text-align:center;padding:1.4rem;background:rgba(0,229,163,0.04)">
-                <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA%20-%20Plan%20PLUS" target="_blank" rel="noopener noreferrer" class="btn-p" style="width:100%;justify-content:center;padding:10px 16px;font-size:.85rem;font-weight:700;background:var(--plus-color);color:#04141d">Adquirir PLUS</a>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divl"></div>
-
-<!-- GARANTÍAS -->
-<section class="gar">
+    </section>
+    <section class="gar">
   <div class="ctr">
     <div class="sh reveal">
       <span class="badge">Nuestros Compromisos</span>
@@ -1576,7 +1553,7 @@
       <div class="gc reveal" style="transition-delay:.3s">
         <div class="gi"><i data-lucide="calendar" style="width:26px;height:26px"></i></div>
         <h4>Flexibilidad Mensual</h4>
-        <p>Pagas el mes que requieras sin contratos a largo plazo ni compromisos forzosos.</p>
+        <p>Pagas el mes que necesites sin contratos a largo plazo ni compromisos forzosos.</p>
       </div>
     </div>
   </div>
@@ -1600,7 +1577,7 @@
         </button>
         <div class="fa">
           <div class="fai">
-            El servicio se adquiere por periodos mensuales para el plan que elijas (PRO o PLUS). No hay contratos forzosos ni cargos adicionales por mensaje enviado. Puedes renovar mes a mes según las necesidades de tu ciclo comercial.
+            El servicio se adquiere por periodos mensuales para el plan que elijas. No hay contratos forzosos ni cargos adicionales por mensaje enviado. Puedes renovar mes a mes según las necesidades de tu ciclo comercial.
           </div>
         </div>
       </div>
@@ -1612,7 +1589,7 @@
         </button>
         <div class="fa">
           <div class="fai">
-            La plataforma incluye varias medidas de seguridad: personalización mediante variables dinámicas para evitar textos idénticos, intervalos de pausa estocásticos entre envíos y, en el Plan PLUS, distribución multicuenta Round-Robin en micro-lotes de 5 para rotar la carga entre diferentes chips con presencia humana.
+            La plataforma incluye varias medidas de seguridad: personalización mediante variables dinámicas para evitar textos idénticos, intervalos de pausa estocásticos entre envíos y, en el Plan, distribución multicuenta Round-Robin en micro-lotes de 5 para rotar la carga entre diferentes chips con presencia humana.
           </div>
         </div>
       </div>
@@ -1624,7 +1601,7 @@
         </button>
         <div class="fa">
           <div class="fai">
-            No. El módulo extractor incluido en el Plan PLUS recopila la información de comercios directamente por cuadrícula geográfica y nicho comercial, sin necesidad de adquirir cuentas de desarrollador ni pagar costos por cada consulta realizada.
+            No. El módulo extractor incluido en el Plan recopila la información de comercios directamente por cuadrícula geográfica y nicho comercial, sin necesidad de adquirir cuentas de desarrollador ni pagar costos por cada consulta realizada.
           </div>
         </div>
       </div>
@@ -1674,11 +1651,7 @@
         Comunícate con nuestro equipo para asesorarte sobre el plan ideal para tu negocio y resolver todas tus inquietudes.
       </p>
       <div class="reveal" style="transition-delay:.3s">
-        <a href="descarga.html" class="btn-p download-cta" style="font-size:.92rem;padding:17px 44px;margin-right:10px">
-          <i data-lucide="download" style="width:22px;height:22px"></i>
-          Descargar gratis
-        </a>
-        <a href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" class="btn-p" style="font-size:.92rem;padding:17px 44px">
+        <a href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" class="btn-p" style="font-size:.92rem;padding:17px 44px">
           <i data-lucide="message-circle" style="width:22px;height:22px"></i>
           Conversar con un Asesor por WhatsApp
         </a>
@@ -1692,7 +1665,7 @@
   </div>
 </section>
 
-<a class="floating-whatsapp" href="https://wa.me/573115893220?text=Quiero%20Soluciones%20WA" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp al +57 311 589 3220">
+<a class="floating-whatsapp" href="https://wa.me/573115893220?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20plataforma%20de%20marketing%20por%20WhatsApp%20de%20Soluciones%20WA." target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp al +57 311 589 3220">
   <i data-lucide="message-circle" style="width:21px;height:21px"></i><span>WhatsApp</span>
 </a>
 
